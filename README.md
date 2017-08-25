@@ -27,5 +27,5 @@
 3、用git命令 `git clone https://github.com/xiejunping/wapman.git`下载项目代码到工作空间<br/>
 4、进入项目`cd wapman`, 下载依耐模块包`npm install`。<br/>
 5、如果没有提示错误，进行后面的操作 ^_^。<br/>
-6、执行命令脚本`npm start`,本地构建http服务，自动启用浏览器调试项目。<br/>
-7、执行命令脚本`npm build`，编译源代码生成`dist`目录,代发布到apicloud应用里。<br/>
+6、执行命令脚本`npm run dev`,本地构建http服务，自动启用浏览器调试项目。<br/>
+7、执行命令脚本`npm run build`，编译源代码生成`dist`目录,代发布到apicloud应用里。<br/>

@@ -3,6 +3,8 @@
   "version": "2.0.1",
   "description": "Simple Multiple-page CLI for scaffolding Vue.js projects",
   "author": "xwpongithub <xwpjava@gmail.com>",
+  "license": "ISC",
+  "repository": "https://github.com/xiejunping/wapman.git",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",

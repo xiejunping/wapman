@@ -10,4 +10,8 @@
   };
 </script>
 
-<style></style>
+<style scoped lang="stylus">
+  .app
+    border-bottom: solid 1px #ff6600
+
+</style>

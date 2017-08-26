@@ -19,6 +19,7 @@ module.exports = {
       '@': utils.resolve('src'),
       'common': utils.resolve('src/common'),
       'components': utils.resolve('src/components'),
+      'base': utils.resolve('src/base'),
       'api': utils.resolve('src/api')
     }
   },

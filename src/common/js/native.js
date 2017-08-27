@@ -12,7 +12,7 @@ export function apiReady(callback) {
 }
 
 export function open(option) {
-  option = Object.assert({}, option, {
+  option = Object.assign({}, option, {
     slidBackEnabled: false
   });
   if (window.api) {

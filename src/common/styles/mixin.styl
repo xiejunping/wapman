@@ -1,0 +1,12 @@
+// 清除浮动
+$clear()
+  &:after
+    content: ''
+    display: block
+    clear: both
+
+// 不换行
+$no-wrap()
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap

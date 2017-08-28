@@ -54,7 +54,6 @@
     },
     computed: {
       titleBtn () {
-        console.log(this.title, this.titleBox);
         if (this.title) {
           return this.title;
         } else if (this.titleBox) {
@@ -81,7 +80,7 @@
     .c-square
       text-align: center
       height: 1.174rem
-      color: $c_whiht
+      color: $c_white
       padding: .287rem 0
 
       i

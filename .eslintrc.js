@@ -27,7 +27,7 @@ module.exports = {
         'indent':0,
         'space-before-function-paren':0,
         'eol-last':0,
-        'one-var': 0,
+        'one-var': [0, {var: "never", let: "never"}],
         'no-return-assign': 0
     }
 }

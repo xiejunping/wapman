@@ -12,6 +12,7 @@
 * 项目开发有组件开发基础，了解过vuex或是redux状态管理的同学
 
 ###  安装说明
+---
 
 准备工作：<br/>
 
@@ -29,3 +30,35 @@
 5、如果没有提示错误，进行后面的操作 ^_^。<br/>
 6、执行命令脚本`npm run dev`,本地构建http服务，自动启用浏览器调试项目。<br/>
 7、执行命令脚本`npm run build`，编译源代码生成`dist`目录,代发布到apicloud应用里。<br/>
+
+###  项目构建说明
+---
+
+#### 目录
+
+* wapman
+  * build --------- 编译配置文件
+  * config -------- 配置开发、生产环境
+  * dist ---------- build生成上线的文件
+  * src ----------- 项目源文件
+    * api --------- 业务数据请求
+    * base -------- 基础组件
+    * common ------ 公共的方法、函数
+    * components -- 业务组件
+    * modules ----- 多页面
+  * static -------- 静态资源
+  * .babelrc ------ es6 配置文件
+  * .editorconfig - eslint 配置文件
+  * .eslintignore - eslint 过滤文件夹
+  * .eslintrc.js -- eslint 检查规则
+  * .postcssrc.js -
+  * pageage.json -- node 项目管理文件
+  * README.md ----- 项目说明文档
+
+ #### 项目构成部门说明
+
+* 请求接口方法`axios`
+
+
+
+* 提示组件`toast`

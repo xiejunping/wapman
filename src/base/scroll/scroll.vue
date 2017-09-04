@@ -71,9 +71,6 @@
             this.$emit('beforeScroll');
           });
         }
-        setTimeout(() => {
-          this.refresh();
-        }, 500);
       },
       disable () {
         this.scroll && this.scroll.disable();

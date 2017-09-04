@@ -16,11 +16,30 @@
   import TopBar from 'base/top-bar/top-bar';
   import ListView from 'base/list/list-view';
 
+  import {getUserInfo} from 'api/home';
+
   export default {
     data () {
       return {
         personList: []
       };
+    },
+    methods: {
+      _init () {
+        this._getData();
+      },
+      _getData () {
+        getUserInfo(1, data => {
+          this.personList = data.projects;
+        }, err => {
+          if (err) {
+            console.log('this error');
+          }
+        });
+      }
+    },
+    created () {
+      this._init();
     },
     components: {Page, TopBar, ListView}
   };

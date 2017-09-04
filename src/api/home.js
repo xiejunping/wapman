@@ -4,7 +4,7 @@ export function getUserInfo(params, callback, error) {
   Req({
     url: '/mock',
     success: res => {
-      console.log(res);
+      callback(res);
     }
   });
 }

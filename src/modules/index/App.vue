@@ -35,8 +35,6 @@
   import Loader from 'base/loading/loader';
   import LoaderRack from 'base/loading/loader-rack';
 
-  import {getUserInfo} from 'api/home';
-
   export default {
     data() {
       return {
@@ -60,21 +58,12 @@
       };
     },
     methods: {
-      init () {
-        this.getData();
-      },
-      getData () {
-        getUserInfo(1, data => {
-          console.log('this success');
-        }, err => {
-          if (err) {
-            console.log('this error');
-          }
-        });
+      _init () {
+
       }
     },
     created () {
-      this.init();
+      this._init();
     },
     components: {Page, TopBar, Toast, Loading, Loader, LoaderRack}
   };

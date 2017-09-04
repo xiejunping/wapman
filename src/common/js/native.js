@@ -79,3 +79,9 @@ export function addEvent(name, callback) {
     });
   }
 }
+
+export function setStatusBarStyle(val) {
+  if (window.api) {
+    window.api.setStatusBarStyle({style: val});
+  }
+}

@@ -1,9 +1,46 @@
 @import "variable.styl"
+@import "mixin.styl"
 
 body, html
+  height: 100%
   line-height: 1
   font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback'
   user-select: none
   -webkit-tap-highlight-color: transparent
-  background: $color-background
-  color: $color-text
+  background: $p_bgcolor
+  color: $p_color
+
+.g-container
+  padding: .267rem 0
+
+.g-box
+  padding: 0 .267rem
+
+.g-row
+  $clear()
+  $flex()
+
+.g-col
+  width: 100%
+  flex: 1 1 auto
+
+// 列-12列栅格&偏移
+for num in 1..8
+  .g-col-{num}
+    float: left
+    width: (100 / 8 * num) + '%'
+    word-wrap: break-word
+    /*flexible-style*/
+    flex: 0 0 auto
+
+  .g-col-offset-{num}
+    margin-left: (100 / 8 * num) + '%'
+
+.g-wrapper
+  height: 100%
+
+.g-list-wrapper
+  width: 100%
+  height: 100%
+  position: relative
+  overflow: hidden

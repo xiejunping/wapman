@@ -2,7 +2,8 @@
   <div v-show="show" :class="positionCls" class="vc-toast">
     <div v-if="icon" class="vc-toast-icon">
       <p>
-        <i :class="icon"></i>
+        <loader-rack v-if="icon === 'load'"></loader-rack>
+        <i v-else :class="icon"></i>
       </p>
     </div>
     <div v-if="title" class="vc-toast-title">
@@ -19,45 +20,43 @@
 </template>
 
 <script type="text/ecmascript-6">
-export default {
-  props: {
-    show: {
-      type: Boolean,
-      default () {
-        return false;
+  import LoaderRack from 'base/loading/loader-rack';
+  export default {
+    props: {
+      show: {
+        type: Boolean,
+        default: false
+      },
+      position: {
+        type: String,
+        default: 'middle'
+      },
+      title: {
+        type: String
+      },
+      text: {
+        type: String
+      },
+      icon: {
+        type: String
       }
     },
-    position: {
-      type: String,
-      default () {
-        return 'middle';
+    computed: {
+      positionCls () {
+        switch (this.position) {
+          case 'top':
+            return 'c-top';
+          case 'middle':
+            return 'c-middle';
+          case 'bottom':
+            return 'c-bottom';
+          default:
+            return 'c-bottom';
+        }
       }
     },
-    title: {
-      type: String
-    },
-    text: {
-      type: String
-    },
-    icon: {
-      type: String
-    }
-  },
-  computed: {
-    positionCls () {
-      switch (this.position) {
-        case 'top':
-          return 'c-top';
-        case 'middle':
-          return 'c-middle';
-        case 'bottom':
-          return 'c-bottom';
-        default:
-          return 'c-bottom';
-      }
-    }
-  }
-};
+    components: {LoaderRack}
+  };
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
@@ -90,6 +89,7 @@ export default {
     top: 50%
     margin-left: -1.5rem
     margin-top: -1.5rem
+
   .c-bottom
     width: 6rem
     left: 50%

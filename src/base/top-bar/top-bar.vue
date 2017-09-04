@@ -1,5 +1,5 @@
 <template>
-  <div class="c-bar">
+  <div class="c-bar" ref="bar">
     <div class="c-bar-left c-square" @click="left.handle">
       <i :class="left.icon"></i>
     </div>
@@ -23,7 +23,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {back} from 'common/js/native';
+  import {back, setStatusBarStyle} from 'common/js/native';
+  import {fixStatusBar} from 'common/js/api';
+
   export default {
     props: {
       title: {
@@ -52,17 +54,30 @@
         leftObj: {}
       };
     },
+    methods: {
+      _initBar () {
+        this._fixStatusBar();
+      },
+      _fixStatusBar () {
+        // 适配iOS 7+，Android 4.4+状态栏
+        fixStatusBar(this.$refs.bar);
+        setStatusBarStyle('light');
+      }
+    },
     computed: {
       titleBtn () {
         if (this.title) {
           return this.title;
         } else if (this.titleBox) {
           return Object.assign({}, {
-            icon: 'icon-dropdown',
+            icon: 'icon-pulldown1',
             text: null
           }, this.titleBox);
         }
       }
+    },
+    mounted () {
+      this._initBar();
     }
   };
 </script>

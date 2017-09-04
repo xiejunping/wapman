@@ -1,12 +1,12 @@
 <template>
-  <section class="vc-page">
-    <header class="vc-page-top">
+  <section class="vc-page" ref="page">
+    <header class="vc-page-top" ref="top">
       <slot name="head"></slot>
     </header>
-    <section class="vc-page-content">
+    <section class="vc-page-content" ref="content">
       <slot></slot>
     </section>
-    <footer class="vc-page-footer">
+    <footer class="vc-page-footer" ref="foot">
       <slot name="foot"></slot>
     </footer>
   </section>
@@ -16,20 +16,31 @@
 
   export default {
     data() {
-      return {
-      };
+      return {};
     },
     methods: {
-      scal () {}
+      _scal () {
+        let page = this.$refs.page.offsetHeight,
+          top = this.$refs.top.offsetHeight,
+          foot = this.$refs.foot.offsetHeight;
+
+        this.$refs.content.style.height = page - top - foot + 'px';
+      }
     },
-    created () {
-      this.scal();
+    mounted () {
+      this.$nextTick(() => {
+        this._scal();
+      });
     },
     components: {}
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  /*@import "~common/styles/index"*/
+  .vc-page
+    height: inherit
+    position: relative
 
+  .vc-page-content
+    position: relative
 </style>

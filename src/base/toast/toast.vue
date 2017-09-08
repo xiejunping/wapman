@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show" :class="positionCls" class="vc-toast">
+  <div v-show="showFlag" :class="positionCls" class="vc-toast" @click.stop>
     <div v-if="icon" class="vc-toast-icon">
       <p>
         <loader-rack v-if="icon === 'load'"></loader-rack>
@@ -23,13 +23,9 @@
   import LoaderRack from 'base/loading/loader-rack';
   export default {
     props: {
-      show: {
-        type: Boolean,
-        default: false
-      },
       position: {
         type: String,
-        default: 'middle'
+        default: 'bottom'
       },
       title: {
         type: String
@@ -39,6 +35,19 @@
       },
       icon: {
         type: String
+      }
+    },
+    data () {
+      return {
+        showFlag: false
+      };
+    },
+    methods: {
+      show() {
+        this.showFlag = true;
+      },
+      hide() {
+        this.showFlag = false;
       }
     },
     computed: {

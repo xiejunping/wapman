@@ -1,6 +1,6 @@
-const ISANDROID = (/android/gi).test(navigator.appVersion);
-const ISIOS = (/ios/gi).test(navigator.appVersion);
-const VERSION = parseFloat(navigator.appVersion);
+export const ISANDROID = (/android/gi).test(navigator.appVersion);
+export const ISIOS = (/iPhone|iPad/gi).test(navigator.appVersion);
+export const VERSION = parseFloat(navigator.appVersion);
 
 export function trim(str) {
   if (String.prototype.trim) {
@@ -62,11 +62,9 @@ export function fixIos7Bar(el) {
     console.warn('$api.fixIos7Bar Function need el param, el param must be DOM Element');
     return;
   }
-  if (ISIOS && window.api) {
-    const fullScreen = window.api.fullScreen;
-    const iOS7StatusBarAppearance = window.api.iOS7StatusBarAppearance;
-    if (VERSION >= 7 && !fullScreen && iOS7StatusBarAppearance) {
-      el.style.paddingTop = '20px';
+  if (ISIOS) {
+    if (VERSION >= 5) {
+      el.style.paddingTop = '0.53334rem';
     }
   }
 }
@@ -79,7 +77,7 @@ export function fixStatusBar(el) {
   if (ISIOS) {
     fixIos7Bar(el);
   } else if (ISANDROID && VERSION >= 4.4) {
-    el.style.paddingTop = '25px';
+    el.style.paddingTop = '0.66667rem';
   }
 }
 

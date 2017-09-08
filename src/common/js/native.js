@@ -1,7 +1,7 @@
 import {setStorage} from 'common/js/api';
+import {loadingShow, toastClose} from 'common/js/toast';
 
 export function apiReady(callback) {
-  // console.log(window.apiready);
   if (window.apiready) {
     window.apiready = function () {
       callback();
@@ -13,10 +13,14 @@ export function apiReady(callback) {
 
 export function open(option) {
   option = Object.assign({}, option, {
-    slidBackEnabled: false
+    slidBackEnabled: false,
+    useWKWebView: true,
+    historyGestureEnabled: true
   });
+
   if (window.api) {
     window.api.openWin(option);
+    openPage();
   } else {
     // 如开发用window.location.href 新开页面
     // 用localstorage来存params里的对象
@@ -27,12 +31,12 @@ export function open(option) {
   }
 }
 
-export function back() {
+export function back(name) {
   if (window.api) {
     window.api.historyBack({
       frameName: name
     }, (ret, err) => {
-      ret.status && window.api.closeWin();
+      !ret.status && window.api.closeWin();
     });
   } else {
     window.history.go(-1);
@@ -40,9 +44,7 @@ export function back() {
 }
 
 export function keyBack(callback = {}) {
-  if (window.api) {
-    addEvent('keyback', callback);
-  }
+  window.api && addEvent('keyback', callback);
 }
 
 export function disableBack() {
@@ -71,17 +73,75 @@ export function disableBack() {
 }
 
 export function addEvent(name, callback) {
-  if (window.api) {
-    window.api.addEventListener({
-      name: name
-    }, (ret, err) => {
-      callback(ret, err);
-    });
-  }
+  window.api && window.api.addEventListener({
+    name: name
+  }, (ret, err) => {
+    callback(ret, err);
+  });
+}
+
+export function removeEvent(name) {
+  window.api && window.api.removeEventListener({
+    name: name
+  });
+}
+
+export function sendEvent(name, extra) {
+  window.api && window.api.sendEvent({
+    name: name,
+    extra: extra
+  });
 }
 
 export function setStatusBarStyle(val) {
   if (window.api) {
     window.api.setStatusBarStyle({style: val});
+  }
+}
+
+export function removeLaunch(ms) {
+  window.api && window.api.removeLaunchView({
+    animation: {
+      type: 'fade',
+      duration: ms
+    }
+  });
+}
+
+export function showProgress(option) {
+  window.api && window.api.showProgress({
+    animationType: option.type,
+    title: option.title,
+    text: option.text,
+    modal: false
+  });
+}
+
+export function hideProgress() {
+  window.api && window.api.hideProgress();
+}
+
+export function disappear(callback) {
+  window.api && window.api.addEventListener({
+    name: 'viewdisappear'
+  }, (ret, err) => {
+    callback(ret, err);
+  });
+}
+
+export function listenPage() {
+  addEvent('removePage', (ret, err) => {
+    toastClose();
+  });
+}
+
+export function openPage() {
+  if (window.api) {
+    loadingShow('加载中');
+    listenPage();
+    disappear((ret, err) => {
+      sendEvent('removePage', null);
+      removeEvent('removePage');
+    });
   }
 }

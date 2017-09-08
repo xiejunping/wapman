@@ -1,12 +1,7 @@
-import 'babel-polyfill';
+import 'common/js/global';
 import Vue from 'vue';
-import fastclick from 'fastclick';
-import {apiReady} from 'common/js/native';
 import App from './App';
-
-import 'common/styles/index.styl';
-
-fastclick.attach(document.body);
+import {apiReady} from 'common/js/native';
 
 /* eslint-disable no-new */
 apiReady(() => {

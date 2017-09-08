@@ -10,18 +10,25 @@
     <!--<p>Hello Word!</p>-->
     <!--</div>-->
 
-    <!--<div>-->
-    <!--<toast title="提交中" :show="true" icon="load"></toast>-->
-    <!--<toast title="努力加载中" :show="true" position="bottom"></toast>-->
-    <!--</div>-->
-
-    <!--<div>-->
-    <!--<loading />-->
-    <!--</div>-->
-
-    <div>
-      <loader/>
+    <div class="g-row g-list-padding">
+      <div class="g-col-8 g-box">
+        <span @click="a">Toast: 提交中</span>
+      </div>
     </div>
+
+    <div class="g-row g-list-padding">
+      <div class="g-col-8 g-box">
+        <span @click="b">Toast: 努力加载中</span>
+      </div>
+    </div>
+
+    <!--<div>-->
+      <!--<loading/>-->
+    <!--</div>-->
+
+    <!--<div>-->
+      <!--<loader/>-->
+    <!--</div>-->
 
   </page>
 </template>
@@ -30,7 +37,7 @@
   import {open} from 'common/js/native';
   import Page from 'components/page/page';
   import TopBar from 'base/top-bar/top-bar';
-  import Toast from 'base/toast/toast';
+
   import Loading from 'base/loading/loading';
   import Loader from 'base/loading/loader';
   import LoaderRack from 'base/loading/loader-rack';
@@ -60,12 +67,18 @@
     methods: {
       _init () {
 
+      },
+      a() {
+        this.$toast.loading('提交中');
+      },
+      b() {
+        this.$toast.error('努力加载中');
       }
     },
     created () {
       this._init();
     },
-    components: {Page, TopBar, Toast, Loading, Loader, LoaderRack}
+    components: {Page, TopBar, Loading, Loader, LoaderRack}
   };
 </script>
 

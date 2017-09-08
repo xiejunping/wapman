@@ -6,8 +6,8 @@
           <div class="title" v-html="title"></div>
           <p class="msg" v-html="msg"></p>
           <div class="operate g-row">
-            <div @click="cancel" class="g-col-4 left-btn">{{cancelBtnText}}</div>
-            <div @click="confirm" class="g-col-4 right-btn">{{confirmBtnText}}</div>
+            <div @click="cancelBtn.handle" class="g-col-4 left-btn">{{cancel.text}}</div>
+            <div @click="confirmBtn.handle" class="g-col-4 right-btn">{{confirm.text}}</div>
           </div>
         </div>
       </div>
@@ -26,13 +26,21 @@
       msg: {
         type: String
       },
-      confirmBtnText: {
-        type: String,
-        default: '确定'
+      confirm: {
+        type: Object,
+        default() {
+          return {
+            text: '确定'
+          };
+        }
       },
-      cancelBtnText: {
-        type: String,
-        default: '取消'
+      cancel: {
+        type: Object,
+        default() {
+          return {
+            text: '取消'
+          };
+        }
       }
     },
     data () {
@@ -46,14 +54,22 @@
       },
       hide () {
         this.showFlag = false;
+      }
+    },
+    computed: {
+      cancelBtn() {
+        return Object.assign({}, {
+          handle: () => {
+            this.hide();
+          }
+        }, this.cancel);
       },
-      cancel () {
-        this.hide();
-        this.$emit('cancel');
-      },
-      confirm () {
-        this.hide();
-        this.$emit('confirm');
+      confirmBtn() {
+        return Object.assign({}, {
+          handle: () => {
+            this.hide();
+          }
+        }, this.confirm);
       }
     }
   };
@@ -97,13 +113,12 @@
         .operate
           margin-top: .267rem
           font-size: $t_4
-          line-height: 1rem
+          line-height: 1.25rem
           border-top: solid 1px $c_light_gray
           .left-btn
             border-right: solid 1px $c_light_gray
           .right-btn
-            color: $c_white
-            background-color: $c_base
+            color: $c_base
 
   @keyframes dialog-fade
     0%

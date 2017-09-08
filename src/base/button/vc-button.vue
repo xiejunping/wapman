@@ -1,11 +1,17 @@
 <template>
   <div class="vc-btn">
-    <button class="vc-btn-primary">登录</button>
+    <button class="vc-btn-primary" @click="btn.handle">
+      <slot></slot>
+    </button>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {};
+  export default {
+    props: {
+      btn: Object
+    }
+  };
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">

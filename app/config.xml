@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget id="A6925569857908" version="0.0.1">
+  <name>wapman</name>
+  <description>
+    vue 多页应用.
+  </description>
+  <author email="417663733@qq.com" href="http://wapman.pjpiao.com">
+    臭皮匠
+  </author>
+  <content src="./dist/root.html" />
+  <access origin="*" />
+  <preference name="pageBounce" value="false"/>
+  <preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+  <preference name="hScrollBarEnabled" value="true"/>
+  <preference name="vScrollBarEnabled" value="true"/>
+  <preference name="autoLaunch" value="true"/>
+  <preference name="fullScreen" value="true"/>
+  <preference name="autoUpdate" value="true" />
+  <preference name="smartUpdate" value="true" />
+  <preference name="debug" value="true"/>
+  <preference name="statusBarAppearance" value="true"/>
+  <preference name="iOS7StatusBarAppearance" value="true"/>
+  <preference name="softInputMode" value="resize"/>
+  <preference name="softInputBarEnabled" value="true" />
+  <preference name="backgroundMode" value="audio | location | bluetooth-central | bluetooth-peripheral"/>
+  <preference name="urlScheme" value="wapman" />
+  <permission name="readPhoneState" />
+  <permission name="camera" />
+  <permission name="record" />
+  <permission name="location" />
+  <permission name="fileSystem" />
+  <permission name="internet" />
+  <permission name="bootCompleted" />
+  <permission name="hardware" />
+  <feature name="ajpush">
+    <param name="app_key" value="651fd0088e422f529b22617b"/>
+    <param name="channel" value="app"/>
+  </feature>
+  <feature name="wx">
+    <param name="urlScheme" value="wxc0b1a14f667e843e"/>
+    <param name="apiKey" value="wxc0b1a14f667e843e"/>
+    <param name="apiSecret" value="179b155da8b0d7ef69d7702be5edd855"/>
+  </feature>
+  <feature name="qq">
+    <param name="urlScheme" value="91tKP8AVK0xezQSx" />
+    <param name="apiKey" value="1106323571" />
+  </feature>
+  <feature name="TalkingData">
+    <param name="logEnable" value="true" />
+    <param name="exceptionReportEnabled" value="true" />
+    <param name="channel" value="Apicloud" />
+  </feature>
+</widget>

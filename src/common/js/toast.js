@@ -5,32 +5,48 @@ const Extoast = Vue.extend(Toast);
 const toastVm = new Extoast().$mount();
 document.body.appendChild(toastVm.$el);
 
-export function loadingShow() {
-  toastVm.show = true;
-  toastVm.title = '努力加载中';
+let CTIME;
+
+export function loadingShow(text) {
+  toastVm.position = 'middle';
+  toastVm.title = text;
+  toastVm.icon = 'load';
+  toastVm.show();
 }
 
 export function toastShow(option) {
-  toastVm.show = true;
   toastVm.position = option.position;
   toastVm.title = option.title;
   toastVm.text = option.text;
   toastVm.icon = option.icon;
+  toastVm.show();
 }
 
 export function toastClose(option) {
-  toastVm.show = false;
+  toastVm.hide();
 }
 
 export function toastAutoClose(option) {
-  toastVm.show = true;
   toastVm.position = option.position;
   toastVm.title = option.title;
   toastVm.text = option.text;
   toastVm.icon = option.icon;
+  toastVm.show();
   if (option.autoClose) {
-    setTimeout(() => {
-      toastClose();
+    CTIME && clearTimeout(CTIME);
+    CTIME = setTimeout(() => {
+      toastVm.hide();
     }, 1000 * option.sec);
   }
+}
+
+export function error(msg) {
+  toastVm.position = 'bottom';
+  toastVm.icon = null;
+  toastVm.title = msg;
+  toastVm.show();
+  CTIME && clearTimeout(CTIME);
+  CTIME = setTimeout(() => {
+    toastVm.hide();
+  }, 3000);
 }

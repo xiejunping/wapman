@@ -67,5 +67,34 @@
 * 请求接口方法`axios`
 
 
-
 * 提示组件`toast`
+
+
+* 对话框组件`vc-dialog`
+
+
+* 列表组件`list-view`
+
+
+* 滚动组件`scroll`
+
+
+* 输入框组件`input-group`
+
+
+* 按钮组件`vc-button`
+
+
+* 加载动画组件`loader` `loader-rack`  `loading`
+
+
+* 暂无数据组件`no-result`
+
+
+* 搜索组件 `search`
+
+
+* 页面组件 `page`
+
+
+* 页头组件 `top-bar`

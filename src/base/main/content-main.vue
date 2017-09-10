@@ -1,7 +1,7 @@
 <template>
   <div class="g-wrapper g-container">
     <div v-if="show">
-      <Offline v-if="offline"></Offline>
+      <Offline v-if="offline" @refresh="$emit('data', true)"></Offline>
       <slot v-else></slot>
     </div>
     <div v-else class="vc-main">

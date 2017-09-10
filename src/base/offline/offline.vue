@@ -5,11 +5,11 @@
         <i class="icon-discover"></i>
       </p>
       <p class="ol-desc">
-        <span>网络不知道去哪了</span>
-        <ins>别紧张，轻触按钮重新加载页面〜</ins>
+        <span>页面加载失败了</span>
+        <ins>别紧张，轻触按钮重新加载页面</ins>
       </p>
       <p class="ol-refresh">
-        <vc-button color="vc-btn-primary-light" @click="refresh">重新加载</vc-button>
+        <vc-button color="vc-btn-primary-light" @click="$emit('refresh')">重新加载</vc-button>
       </p>
     </div>
   </div>
@@ -18,11 +18,6 @@
 <script type="text/ecmascript-6">
   import VcButton from 'base/button/vc-button';
   export default {
-    methods: {
-      refresh() {
-        window.location.reload();
-      }
-    },
     components: {VcButton}
   };
 </script>

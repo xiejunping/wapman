@@ -4,7 +4,10 @@
       <top-bar title="联系人"></top-bar>
     </div>
 
-    <content-main :mounted="show" @data="getData" :respond="respond" :offline="offline">
+    <content-main :mounted="show"
+                  @data="getData"
+                  :respond="respond"
+                  :offline="offline">
       <list-view :data="personList" ref="list"></list-view>
     </content-main>
 

@@ -26,9 +26,10 @@
       <!--<loading/>-->
     <!--</div>-->
 
-    <!--<div>-->
+    <div>
       <!--<loader/>-->
-    <!--</div>-->
+      <!--<spinner indeterminate></spinner>-->
+    </div>
 
   </page>
 </template>
@@ -41,6 +42,7 @@
   import Loading from 'base/loading/loading';
   import Loader from 'base/loading/loader';
   import LoaderRack from 'base/loading/loader-rack';
+  import Spinner from 'base/loading/spinner';
 
   export default {
     data() {
@@ -78,7 +80,7 @@
     created () {
       this._init();
     },
-    components: {Page, TopBar, Loading, Loader, LoaderRack}
+    components: {Page, TopBar, Loading, Loader, LoaderRack, Spinner}
   };
 </script>
 

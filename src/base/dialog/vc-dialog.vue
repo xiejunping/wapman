@@ -1,5 +1,5 @@
 <template>
-  <transition name="dialog-fade">
+  <transition name="dialog-fade" appear>
     <div class="vc-dialog" v-show="showFlag" @click.stop>
       <div class="dialog-wrapper">
         <div class="dialog-content">

@@ -4,7 +4,7 @@
       <top-bar :title-box="title"></top-bar>
     </div>
 
-    <div class="g-container">
+    <content-main>
       <div class="g-list-padding g-row">
         <div class="g-col-8 g-box">
           <label for="">我是个人中心页</label>
@@ -12,10 +12,10 @@
       </div>
       <div class="g-list-padding g-row">
         <div class="g-col-8 g-box">
-          <vc-button :btn="loginout">退出登录</vc-button>
+          <vc-button @click="showDialog">退出登录</vc-button>
         </div>
       </div>
-    </div>
+    </content-main>
 
 
     <div slot="foot"></div>
@@ -25,6 +25,7 @@
 <script type="text/ecmascript-6">
   import Page from 'components/page/page';
   import TopBar from 'base/top-bar/top-bar';
+  import ContentMain from 'base/main/content-main';
   import VcButton from 'base/button/vc-button';
   import {open} from 'common/js/native';
 
@@ -37,37 +38,27 @@
         }
       };
     },
-    computed: {
-      loginout () {
-        let me = this;
-        return {
-          style: '',
-          icon: '',
-          handle() {
-            me.$dialog.open({
-              msg: '您确定要退出系统吗？',
-              confirm: {
-                text: '确定',
-                handle() {
-                  open({
-                    name: 'login',
-                    url: './login.html'
-                  });
-                }
-              }
-            });
-          }
-        };
-      }
-    },
     methods: {
-      showDialog () {
-
+      showDialog (e) {
+        let me = this;
+        this.$dialog.open({
+          msg: '您确定要退出系统吗？',
+          confirm: {
+            text: '确定',
+            handle() {
+              me.$dialog.close();
+              open({
+                name: 'login',
+                url: './login.html'
+              });
+            }
+          }
+        });
       }
     },
     created() {
     },
-    components: {Page, TopBar, VcButton}
+    components: {Page, TopBar, ContentMain, VcButton}
   };
 </script>
 

@@ -45,6 +45,6 @@ export default function (option) {
       }
     }
   }).catch(err => {
-    console.log(err);
+    option.faild(err);
   });
 };

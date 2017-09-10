@@ -21,8 +21,10 @@
 
   .loader, .loader:after
     border-radius: 50%
-    width: 1.5rem
-    height: 1.5rem
+    width: 1.2rem
+    height: 1.2rem
+    margin-top: .167rem
+    margin-bottom: .134rem
 
   @-webkit-keyframes rack
     0%

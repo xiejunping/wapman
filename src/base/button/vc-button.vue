@@ -1,6 +1,6 @@
 <template>
   <div class="vc-btn">
-    <button class="vc-btn-primary" @click="btn.handle">
+    <button :class="classes" @click="$emit('click', $event)" :disabled="disabled">
       <slot></slot>
     </button>
   </div>
@@ -9,7 +9,14 @@
 <script type="text/ecmascript-6">
   export default {
     props: {
-      btn: Object
+      btn: Object,
+      disabled: Boolean,
+      color: String
+    },
+    computed: {
+      classes() {
+        return this.color || 'vc-btn-primary';
+      }
     }
   };
 </script>

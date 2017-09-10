@@ -5,7 +5,7 @@
           :data="data"
           class="g-list-wrapper"
           ref="listview">
-    <div class="g-container address">
+    <div class="vc-list-view">
       <div v-for="t in data" class="li-item g-box g-row g-list-padding">
         <div class="g-col-2 li-name">
           {{t.name}}
@@ -21,6 +21,7 @@
 <script type="text/ecmascript-6">
   import Scroll from 'base/scroll/scroll';
   export default {
+    name: 'list-view',
     props: {
       data: {
         type: Array,
@@ -42,7 +43,7 @@
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
   @import "~common/styles/variable"
-  .address
+  .vc-list-view
     font-size: $t_3
     .li-item
       background-color: $c_white

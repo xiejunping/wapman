@@ -5,6 +5,9 @@ export function getUserInfo(params, callback, error) {
     url: '/mock',
     success: res => {
       callback(res);
+    },
+    faild: err => {
+      error(err);
     }
   });
 }

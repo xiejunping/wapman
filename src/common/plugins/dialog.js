@@ -16,6 +16,9 @@ export default {
         $vm.msg = text;
         $vm.show();
       },
+      close() {
+        $vm.hide();
+      },
       open(option) {
         option.title && ($vm.title = option.title);
         option.msg && ($vm.msg = option.msg);

@@ -18,7 +18,7 @@
     <div class="g-box">
       <div class="g-row login-button">
         <div class="g-col">
-          <vc-button :btn="login">登录</vc-button>
+          <vc-button @click="login">登录</vc-button>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
     <div class="g-box">
       <div class="g-row login-button">
         <div class="g-col">
-          <vc-button :btn="login">登录</vc-button>
+          <vc-button @click="login">登录</vc-button>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
     <div class="g-box">
       <div class="g-row login-button">
         <div class="g-col">
-          <vc-button :btn="login">登录</vc-button>
+          <vc-button @click="login">登录</vc-button>
         </div>
       </div>
     </div>
@@ -78,14 +78,8 @@
         }
       };
     },
-    computed: {
+    methods: {
       login() {
-        return {
-          style: '',
-          icon: '',
-          handle() {
-          }
-        };
       }
     },
     components: {InputGroup, VcButton}

@@ -86,6 +86,13 @@
  第三方插件及工具，调试工具(apploader)，脚手架(vue-cli)，打包工具(apicloud)，测试工具(postman)，接口数据模拟(easy-mock), 支持文档(gitbook)
  
 
+ ### 1像素边框移动端解决方案
+ 
+ * flexible 阿里解决方案
+ 
+ ### 引用阿里字体图标库
+
+
 * 请求接口方法`axios`
 
 

@@ -1,17 +1,15 @@
 <template>
   <div class="vc-offline">
-    <div>
-      <p class="ol-img">
-        <i class="icon-discover"></i>
-      </p>
-      <p class="ol-desc">
-        <span>页面加载失败了</span>
-        <ins>别紧张，轻触按钮重新加载页面</ins>
-      </p>
-      <p class="ol-refresh">
-        <vc-button color="vc-btn-primary-light" @click="$emit('refresh')">重新加载</vc-button>
-      </p>
-    </div>
+    <p class="ol-img">
+      <i class="icon-discover"></i>
+    </p>
+    <p class="ol-desc">
+      <span>页面加载失败了</span>
+      <ins>别紧张，轻触按钮重新加载页面</ins>
+    </p>
+    <p class="ol-refresh">
+      <vc-button color="vc-btn-primary-light" @click="$emit('refresh')">重新加载</vc-button>
+    </p>
   </div>
 </template>
 

@@ -49,7 +49,8 @@
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
           click: this.click,
-          scrollbar: true
+          scrollbar: true,
+          preventDefaultException: {tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/, className: /(^|\s)vc-li-item(\s|$)/}
         });
 
         if (this.listenScroll) {

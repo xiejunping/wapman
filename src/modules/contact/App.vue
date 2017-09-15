@@ -8,7 +8,8 @@
                   @data="getData"
                   :respond="respond"
                   :offline="offline">
-      <list-view :data="personList" ref="list"></list-view>
+      <list-view v-if="personList.length" :data="personList" @fnlist="goItem" ref="list"></list-view>
+      <no-result v-else></no-result>
     </content-main>
 
   </page>
@@ -18,6 +19,7 @@
   import Page from 'components/page/page';
   import TopBar from 'base/top-bar/top-bar';
   import ContentMain from 'base/main/content-main';
+  import NoResult from 'base/no-result/no-result';
   import ListView from 'base/list/list-view';
 
   import {getUserInfo} from 'api/home';
@@ -39,6 +41,7 @@
         this.respond = res;
         getUserInfo(1, data => {
           this.show = true;
+          this.offline = false;
           this.personList = data.projects;
         }, err => {
           if (err) {
@@ -46,12 +49,15 @@
             this.offline = true;
           }
         });
+      },
+      goItem (meta) {
+        console.log(meta);
       }
     },
     created () {
       this._init();
     },
-    components: {Page, TopBar, ContentMain, ListView}
+    components: {Page, TopBar, ContentMain, ListView, NoResult}
   };
 </script>
 

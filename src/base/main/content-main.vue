@@ -1,10 +1,20 @@
 <template>
-  <div class="g-wrapper g-container">
-    <div v-if="show">
+  <div class="g-wrapper">
+    <div v-if="show" class="vc-main">
       <Offline v-if="offline" @refresh="$emit('data', true)"></Offline>
-      <slot v-else></slot>
+      <scroll v-else
+              @scroll="scroll"
+              :data="data"
+              :listen-scroll="listenScroll"
+              :probe-type="probeType"
+              class="main-list"
+              ref="mainList">
+        <div class="g-container">
+          <slot></slot>
+        </div>
+      </scroll>
     </div>
-    <div v-else class="vc-main">
+    <div v-else class="vc-loading">
       <spinner indeterminate></spinner>
     </div>
   </div>
@@ -13,6 +23,7 @@
 <script type="text/ecmascript-6">
   import Spinner from 'base/loading/spinner';
   import Offline from 'base/offline/offline';
+  import Scroll from 'base/scroll/scroll';
   export default {
     name: 'content-main',
     props: {
@@ -20,23 +31,44 @@
       respond: Boolean,
       offline: Boolean
     },
+    data() {
+      return {
+        data: null
+      };
+    },
+    methods: {
+      scroll(pos) {
+        console.log(pos);
+      }
+    },
     computed: {
       show() {
         if (this.respond) return this.mounted;
         else return true;
       }
     },
+    created() {
+      this.probeType = 1;
+      this.listenScroll = false;
+    },
     mounted() {
       this.$nextTick(() => {
+        this.data = [];
         this.$emit('data', true);
       });
     },
-    components: {Spinner, Offline}
+    components: {Spinner, Offline, Scroll}
   };
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .vc-main
+    height: inherit
+    .main-list
+      width: 100%
+      height: 100%
+      overflow: hidden
+  .vc-loading
     padding-top: .56rem
     text-align: center
 </style>

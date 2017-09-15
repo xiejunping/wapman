@@ -15,7 +15,7 @@ export function trimAll(str) {
 }
 
 export function isElement(obj) {
- return !!(obj && obj.nodeType === 1);
+  return !!(obj && obj.nodeType === 1);
 }
 
 export function setStorage(key, value) {

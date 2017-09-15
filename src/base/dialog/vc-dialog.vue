@@ -120,7 +120,7 @@
           .right-btn
             color: $c_base
 
-  @keyframes dialog-fade
+  @keyframes dialog-fadein
     0%
       opacity: 0
     100%

@@ -40,7 +40,8 @@
   .vc-page
     height: inherit
     position: relative
-
+    overflow-y: hidden
+    overflow-x: hidden
   .vc-page-content
     position: relative
 </style>

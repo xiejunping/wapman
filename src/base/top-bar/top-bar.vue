@@ -15,6 +15,7 @@
         <i v-if="r.icon" :class="r.icon"></i>
         <span v-else>{{r.text}}</span>
       </div>
+      <slot name="baright"></slot>
     </div>
     <div class="c-slot">
       <slot></slot>
@@ -97,11 +98,11 @@
       height: 1.174rem
       color: $c_white
       padding: .287rem 0
-
       i
         font-size: .6rem
 
     .c-bar-left
+      $active-block()
       width: 1.174rem
       float: left
 
@@ -111,9 +112,12 @@
       position: absolute
       right: 0
       bottom: 0
+      padding: 0
       .c-right-item
+        $active-block()
         width: 1.174rem
         float: right
+        padding: .287rem 0
 
     .c-bar-center
       margin: 0 1.174rem
@@ -122,6 +126,8 @@
         $no-wrap()
         max-width: 70%
         display: inline-block
+      i
+        $active-block()
 
     .c-slot
       position: absolute

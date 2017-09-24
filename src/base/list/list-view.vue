@@ -38,8 +38,7 @@
       border-top: solid 1px $c_light_gray
       &:first-child
         border-top: none
-      .li-name
-        text-align: center
+
     .vc-li-item
       position: absolute
       top: 0

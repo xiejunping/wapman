@@ -23,8 +23,25 @@
     </div>
 
     <!--<div>-->
-      <!--<loading/>-->
+    <!--<loading/>-->
     <!--</div>-->
+
+    <div class="g-box">
+      <vc-image :src="s"></vc-image>
+
+      <avatar class="vc-large" @click="c">
+        <img src="~common/images/user.jpg" alt="">
+      </avatar>
+
+      <avatar classes="vc-avatar-icon vc-large" @click="">
+        <img :src="bimg" alt="">
+      </avatar>
+
+      <avatar classes="vc-avatar-icon vc-primary">
+        <vc-image src=""></vc-image>
+      </avatar>
+    </div>
+
 
     <div>
       <!--<loader/>-->
@@ -43,7 +60,10 @@
   import Loader from 'base/loading/loader';
   import LoaderRack from 'base/loading/loader-rack';
   import Spinner from 'base/loading/spinner';
+  import VcImage from 'base/image/vc-image';
+  import Avatar from 'base/avatar/avatar';
 
+  import userImg from 'common/images/user.jpg';
   export default {
     data() {
       return {
@@ -63,7 +83,9 @@
               url: './contact.html'
             });
           }
-        }]
+        }],
+        s: userImg,
+        bimg: 'http://www.jadeshpfe.hk/Uploads/201611/thumb_138_88_58198ef26286f.jpg'
       };
     },
     methods: {
@@ -75,12 +97,18 @@
       },
       b() {
         this.$toast.error('努力加载中');
+      },
+      c() {
+        open({
+          name: 'weixin',
+          url: './weixin.html'
+        });
       }
     },
     created () {
       this._init();
     },
-    components: {Page, TopBar, Loading, Loader, LoaderRack, Spinner}
+    components: {Page, TopBar, Loading, Loader, LoaderRack, Spinner, VcImage, Avatar}
   };
 </script>
 

@@ -78,5 +78,5 @@ function rmBindTags() {
 }
 
 function requireModule() {
-  return window.api && api.require('ajpush');
+  return window.api && window.api.require('ajpush');
 }

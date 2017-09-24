@@ -14,7 +14,7 @@
 ###  安装说明
 ---
 
-#### 餐链app开发（webapp）持术栈是 `vue.js` + `webpack` + `apicloud` 开发技术
+#### app开发（webapp）持术栈是 `vue.js` + `webpack` + `apicloud` 开发技术
 
 * `vue.js` 是前端非常热门的 mvvm 框架，百度里有更好、更准备的解释。
 * `webpack` 是 node.js 项目使用的最热门编译脚手架，vue 全家桶中也使用了，轻松构建 开发，生产多环境编译配置。<br>
@@ -127,3 +127,16 @@
 
 
 * 页头组件 `top-bar`
+
+
+# 视频教程
+
+  * 百度网盘
+  
+    * 1､wapman_01  项目视频讲解第一课 项目的构建 链接: https://pan.baidu.com/s/1eSfCavK 密码: 79vm
+    * 2､wapman_02  项目讲解第二课  ES6入门视频 链接: https://pan.baidu.com/s/1i5ORiN7 密码: emah
+  
+  * 高清视频
+  
+    * 1、wapman_01  项目视频讲解第一课 项目的构建 链接: https://chuanke.baidu.com/v2503702-235599-1716888.html
+    * 2、wapman_02  项目讲解第二课  ES6入门视频 链接: https://chuanke.baidu.com/v2503702-235599-1732384.html

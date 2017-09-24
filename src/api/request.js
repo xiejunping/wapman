@@ -1,3 +1,8 @@
+/**
+ * 接口请求主要方法
+ * option
+ */
+
 import axios from 'axios';
 import {HOST_API, CODE_OK, CODE_ERR} from 'api/config';
 import {error} from 'common/js/toast';

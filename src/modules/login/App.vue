@@ -19,7 +19,8 @@
       <div class="g-box">
         <div class="g-row login-button">
           <div class="g-col">
-            <vc-button @click="login">登录</vc-button>
+            <vc-button v-if="sign">登录<ins>...</ins></vc-button>
+            <vc-button v-else @click="login">登录</vc-button>
           </div>
         </div>
       </div>
@@ -92,11 +93,14 @@
           handle() {
             console.log('请求验证码');
           }
-        }
+        },
+        sign: false
       };
     },
     methods: {
       login() {
+        this.sign = true;
+        console.log('login');
       },
       a () {
         console.log('a');
@@ -126,6 +130,18 @@
     width: 100%
     background-color: $c_white
 
-
+  ins
+    display: inline-block
+    width: 3ch
+    text-indent: 0
+    vertical-align: bottom
+    overflow: hidden
+    animation: dot 3s infinite step-start both
+    font-family: Consolas, Monaco, monospace
+  @keyframes dot
+    33%
+      text-indent: -4ch
+    66%
+      text-indent: -2ch
 
 </style>

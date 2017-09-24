@@ -87,6 +87,8 @@
   @import "~common/styles/variable"
   @import "~common/styles/mixin"
 
+  $c_bar_height = 1.44rem
+  $c_bar_padding = .35rem
   .c-bar
     $clear()
     position: relative
@@ -95,33 +97,33 @@
 
     .c-square
       text-align: center
-      height: 1.174rem
+      height: $c_bar_height
       color: $c_white
-      padding: .287rem 0
+      padding: $c_bar_padding 0
       i
-        font-size: .6rem
+        font-size: .74rem
 
     .c-bar-left
       $active-block()
-      width: 1.174rem
+      width: $c_bar_height
       float: left
 
     .c-bar-right
       $clear()
-      min-width: 1.174rem
+      min-width: $c_bar_height
       position: absolute
       right: 0
       bottom: 0
       padding: 0
       .c-right-item
         $active-block()
-        width: 1.174rem
+        width: $c_bar_height
         float: right
-        padding: .287rem 0
+        padding: $c_bar_padding 0
 
     .c-bar-center
-      margin: 0 1.174rem
-      font-size: $t_4
+      margin: 0 $c_bar_height
+      font-size: $t_5
       span
         $no-wrap()
         max-width: 70%
@@ -132,8 +134,8 @@
     .c-slot
       position: absolute
       width: 100%
-      top: 1.174rem
+      top: $c_bar_height
 
     .c-title
-      line-height: .6rem
+      line-height: .74rem
 </style>

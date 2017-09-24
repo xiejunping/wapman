@@ -4,4 +4,6 @@ export const CODE_ERR = '10010';
 export const HOST_API = process.env.NODE_ENV === 'production' ?
   'http://easy-mock.com/mock/598da121a1d30433d85e77b2/example' :
   'http://easy-mock.com/mock/598da121a1d30433d85e77b2/example';
+export const WX_HOST = process.env.NODE_ENV === 'production' ?
+  'http://wx.pjpiao.com' : 'http://wxt.pjpiao.com';
 /* eslint-enable */

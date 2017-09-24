@@ -17,6 +17,7 @@
 
 <script type="text/ecmascript-6">
   export default {
+    name: 'drop-menu',
     props: {
       data: Array,
       show: Boolean
@@ -30,8 +31,8 @@
   .vc-dropmenu
     position: absolute
     z-index: 1000
-    right: .134rem
-    top: 1.307rem
+    right: .244rem
+    top: 1.8rem
 
     &.dropmenu-fade-enter-active
       animation: drop-fadein 0.3s
@@ -40,7 +41,6 @@
 
     .dropmenu-content
       width: 3.62rem
-      box-shadow: 0 0 0 .026rem rgba($c_black, .3)
       border-radius: .134rem
       font-size: $t_3
       color: $c_dark_white
@@ -51,14 +51,14 @@
         position: absolute
         width: 0
         height: 0
-        margin-top: -0.267rem
+        margin-top: -0.258rem
         right: .246rem
         border-left: .267rem solid transparent
         border-right: .267rem solid transparent
         border-bottom: .267rem solid rgba($c_black, .8)
         z-index: 1002
 
-    >div
+    > div
       .dropmenu
         padding: .267rem 0
       .dm-title

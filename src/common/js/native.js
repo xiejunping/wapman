@@ -94,7 +94,9 @@ export function sendEvent(name, extra) {
 }
 
 export function setStatusBarStyle(val) {
-  window.api && window.api.setStatusBarStyle({style: val});
+  window.api && window.api.setStatusBarStyle({
+    style: val
+  });
 }
 
 export function removeLaunch(ms) {

@@ -20,7 +20,8 @@ module.exports = {
       'common': utils.resolve('src/common'),
       'components': utils.resolve('src/components'),
       'base': utils.resolve('src/base'),
-      'api': utils.resolve('src/api')
+      'api': utils.resolve('src/api'),
+      'cloud': utils.resolve('src/cloud')
     }
   },
   module: {
@@ -48,7 +49,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 4000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },

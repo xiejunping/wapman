@@ -82,7 +82,7 @@
           <label for="">我是个人中心页</label>
         </div>
       </div>
-      <div class="g-list-padding g-row vc-li-item">
+      <div class="g-list-padding g-row">
         <div class="g-col-8 g-box">
           <vc-button @click="showDialog">退出登录</vc-button>
         </div>

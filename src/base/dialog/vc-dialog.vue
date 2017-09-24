@@ -85,9 +85,9 @@
     right: 0
     bottom: 0
     z-index: 998
-    background-color: rgba(0, 0, 0, .4)
+    background-color: rgba(0, 0, 0, 0.4)
     &.dialog-fade-enter-active
-      animation: dialog-fadein 0.3s
+      animation: dialog-fade 0.3s
       .dialog-content
         animation: dialog-zoom 0.3s
 
@@ -124,7 +124,7 @@
     0%
       opacity: 0
     100%
-      opacity: 1
+      opacity: 0.4
 
   @keyframes dialog-zoom
     0%

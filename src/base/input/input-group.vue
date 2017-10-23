@@ -1,7 +1,46 @@
 <template>
   <div class="vc-input" :class="group">
     <span v-if="addon" class="vc-input-addon" v-html="addon"></span>
-    <input :type="type" class="vc-form-control" :placeholder="placeholder"/>
+    <input v-if="type === 'tel'"
+           type="tel"
+           v-model="inputxt"
+           class="vc-form-control"
+           :placeholder="placeholder"
+           :disabled="disabled"
+           :readonly="readonly"
+           @focus="onFocus"
+           @blur="onBlur"
+           @input="onInput"/>
+    <input v-else-if="type === 'number'"
+           type="number"
+           v-model="inputxt"
+           class="vc-form-control"
+           :placeholder="placeholder"
+           :disabled="disabled"
+           :readonly="readonly"
+           @focus="onFocus"
+           @blur="onBlur"
+           @input="onInput"/>
+    <input v-else-if="type === 'password'"
+           type="password"
+           v-model="inputxt"
+           class="vc-form-control"
+           :placeholder="placeholder"
+           :disabled="disabled"
+           :readonly="readonly"
+           @focus="onFocus"
+           @blur="onBlur"
+           @input="onInput"/>
+    <input v-else="type === 'text'"
+           type="text"
+           v-model="inputxt"
+           class="vc-form-control"
+           :placeholder="placeholder"
+           :disabled="disabled"
+           :readonly="readonly"
+           @focus="onFocus"
+           @blur="onBlur"
+           @input="onInput"/>
     <span v-if="btn" class="vc-input-btn" v-html="btn.text" @click="btn.handle"></span>
   </div>
 </template>
@@ -10,8 +49,17 @@
   export default {
     name: 'input',
     props: {
+      value: {
+        type: [String, Number]
+      },
       addon: {
         type: String
+      },
+      disabled: {
+        type: Boolean
+      },
+      readonly: {
+        type: Boolean
       },
       btn: {
         type: Object
@@ -24,10 +72,29 @@
         default: 'input-group'
       },
       type: {
-        type: String
+        type: String,
+        default: 'text'
       },
       size: {
         type: Number
+      }
+    },
+    computed: {
+      inputxt: {
+        get() {
+          return this.value;
+        },
+        set(val) {
+          this.$emit('input', val);
+        }
+      }
+    },
+    methods: {
+      onFocus() {
+      },
+      onBlur() {
+      },
+      onInput() {
       }
     }
   };

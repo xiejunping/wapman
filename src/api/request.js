@@ -6,6 +6,9 @@
 import axios from 'axios';
 import {HOST_API, CODE_OK, CODE_ERR} from 'api/config';
 import {error} from 'common/js/toast';
+import {getStorage} from 'common/js/api';
+import {timeout} from 'common/js/utils';
+import {sendEvent} from 'common/js/native';
 
 export default function (option) {
   option = Object.assign({}, {
@@ -22,7 +25,10 @@ export default function (option) {
     params: option.params,
     data: option.data,
     timeout: option.timeout,
-    headers: {},
+    headers: {
+      'Token': getStorage('token'),
+      'Client': 'app'
+    },
     withCredentials: false,
     auth: {},
     responseType: option.resType,
@@ -33,16 +39,19 @@ export default function (option) {
     },
     maxContentLength: 2000
   }).then(res => {
+    console.log(res);
     let body = res.data || {};
-    if (CODE_OK === body.code) {
-      if (typeof body.data === 'object') {
-        option.success(body.data);
-      } else {
+    if (CODE_OK === body.ret) {
+      if (typeof body.data === 'undefined') {
         error('接口返回数据中没有"data"');
+      } else {
+        option.success(body.data);
       }
-    } else if (CODE_ERR === body.code) {
-      error('用户登陆信息失效，请重新登录');
+    } else if (CODE_ERR === body.ret) {
+      error('登陆信息失效，请重新登录');
+      timeout(3000).then(() => sendEvent('loginout'));
     } else {
+      body.msg = body.msg.replace(/非法请求：/g, '');
       if (option.error) {
         option.error(body.msg);
       } else {

@@ -29,7 +29,6 @@
   @import "~common/styles/mixin"
   .vc-list-view
     font-size: $t_3
-    border-top: solid 1px $c_gray
     .li-item
       $active-block()
       position: relative

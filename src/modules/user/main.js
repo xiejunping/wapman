@@ -4,7 +4,7 @@ import App from './App';
 import {apiReady} from 'common/js/native';
 
 /* eslint-disable no-new */
-apiReady(() => {
+apiReady().then(() => {
   new Vue({
     el: '#app',
     render: h => h(App)

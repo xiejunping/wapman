@@ -18,6 +18,10 @@ body, html
   padding-left: .267rem
   padding-right: .267rem
 
+.g-spacer{
+  margin-bottom: .267rem
+}
+
 .g-row
   $clear()
   $flex()
@@ -38,6 +42,13 @@ for num in 1..8
   .g-col-offset-{num}
     margin-left: (100 / 8 * num) + '%'
 
+.g-right
+  text-align: right
+.g-center
+  text-align: center
+.g-left
+  text-align: left
+
 .g-wrapper
   height: 100%
 
@@ -53,3 +64,6 @@ for num in 1..8
 .g-list-padding-bigger
   padding-top: .587rem
   padding-bottom: .587rem
+.g-list-padding-thiner
+  padding-top: .267rem
+  padding-bottom: .267rem

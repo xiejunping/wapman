@@ -1,3 +1,4 @@
+export const ISAPP = (/file/gi).test(location.protocol);
 export const ISANDROID = (/android/gi).test(navigator.appVersion);
 export const ISIOS = (/iPhone|iPad/gi).test(navigator.appVersion);
 export const VERSION = parseFloat(navigator.appVersion);

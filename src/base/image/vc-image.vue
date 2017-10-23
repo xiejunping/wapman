@@ -1,5 +1,5 @@
 <template>
-  <img :src="vcSrc" class="vc-image" alt=""/>
+  <img :src="vcSrc" :width="width" class="vc-image" alt=""/>
 </template>
 
 <script type="text/ecmascript-6">
@@ -7,7 +7,8 @@
   export default {
     name: 'vc-image',
     props: {
-      src: String
+      src: String,
+      width: String
     },
     computed: {
       vcSrc() {

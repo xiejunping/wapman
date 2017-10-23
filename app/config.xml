@@ -15,7 +15,7 @@
   <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
   <preference name="hScrollBarEnabled" value="true"/>
   <preference name="vScrollBarEnabled" value="true"/>
-  <preference name="autoLaunch" value="true"/>
+  <preference name="autoLaunch" value="false"/>
   <preference name="fullScreen" value="true"/>
   <preference name="autoUpdate" value="true" />
   <preference name="smartUpdate" value="true" />
@@ -51,5 +51,9 @@
     <param name="logEnable" value="true" />
     <param name="exceptionReportEnabled" value="true" />
     <param name="channel" value="Apicloud" />
+  </feature>
+  <feature name="smsVerify">
+    <param name="app_key" value="21bf079f1d1be"/>
+    <param name="app_secret" value="aa41bc701167ae87ca44fb8c154aae2e"/>
   </feature>
 </widget>

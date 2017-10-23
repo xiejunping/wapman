@@ -1,7 +1,7 @@
 <template>
   <page>
     <div slot="head">
-      <top-bar title="首页" :right="right"></top-bar>
+      <top-bar title="首页" :right="right" :left="left"></top-bar>
     </div>
 
     <!--<div class="app">-->
@@ -33,7 +33,7 @@
         <img src="~common/images/user.jpg" alt="">
       </avatar>
 
-      <avatar classes="vc-avatar-icon vc-large" @click="">
+      <avatar classes="vc-avatar-icon vc-large" @click="acShow">
         <img :src="bimg" alt="">
       </avatar>
 
@@ -64,9 +64,18 @@
   import Avatar from 'base/avatar/avatar';
 
   import userImg from 'common/images/user.jpg';
+
+  import upLoad from 'common/mixins/uploadimg';
+
   export default {
+    mixins: [upLoad],
     data() {
       return {
+        left: {
+          icon: '',
+          handle() {
+          }
+        },
         right: [{
           icon: 'icon-my',
           handle() {
@@ -85,7 +94,7 @@
           }
         }],
         s: userImg,
-        bimg: 'http://www.jadeshpfe.hk/Uploads/201611/thumb_138_88_58198ef26286f.jpg'
+        bimg: 'http://owsks8a4c.bkt.clouddn.com/20171009175457_1bf87db21632363db98266207403a0e6'
       };
     },
     methods: {
@@ -101,8 +110,11 @@
       c() {
         open({
           name: 'weixin',
-          url: './weixin.html'
+          url: './upload.html'
         });
+      },
+      imgoutput(base64) {
+        window.api.alert({msg: base64});
       }
     },
     created () {

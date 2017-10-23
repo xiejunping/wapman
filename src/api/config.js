@@ -1,9 +1,9 @@
-export const CODE_OK = '0';
-export const CODE_ERR = '10010';
+export const CODE_OK = 200;
+export const CODE_ERR = 501;
 /* eslint-disable */
 export const HOST_API = process.env.NODE_ENV === 'production' ?
-  'http://easy-mock.com/mock/598da121a1d30433d85e77b2/example' :
-  'http://easy-mock.com/mock/598da121a1d30433d85e77b2/example';
+  'http://web.pjpiao.com/public' :
+  'http://web.pjpiao.com/public';
 export const WX_HOST = process.env.NODE_ENV === 'production' ?
   'http://wx.pjpiao.com' : 'http://wxt.pjpiao.com';
 /* eslint-enable */

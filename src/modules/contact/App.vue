@@ -35,7 +35,7 @@
     },
     methods: {
       _init () {
-        console.log('init');
+        console.info('init');
       },
       getData (res) {
         this.respond = res;

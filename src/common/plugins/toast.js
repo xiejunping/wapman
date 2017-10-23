@@ -1,4 +1,4 @@
-import Toast from 'base/toast/toast.vue';
+import Toast from 'base/toast/toast';
 
 let $vm, CTIME;
 

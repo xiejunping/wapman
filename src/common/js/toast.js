@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Toast from 'base/toast/toast';
-import {timeout} from 'common/js/utils';
 
+let CTIME = null;
 const Extoast = Vue.extend(Toast);
 const toastVm = new Extoast().$mount();
 document.body.appendChild(toastVm.$el);
@@ -32,9 +32,10 @@ export function toastAutoClose(option) {
   toastVm.icon = option.icon;
   toastVm.show();
   if (option.autoClose) {
-    timeout(1000 * option.sec).then(() => {
+    if (CTIME) clearTimeout(CTIME);
+    CTIME = setTimeout(() => {
       toastVm.hide();
-    });
+    }, 1000 * option.sec);
   }
 }
 
@@ -43,7 +44,8 @@ export function error(msg) {
   toastVm.icon = null;
   toastVm.title = msg;
   toastVm.show();
-  timeout(3000).then(() => {
+  if (CTIME) clearTimeout(CTIME);
+  CTIME = setTimeout(() => {
     toastVm.hide();
-  });
+  }, 3000);
 }

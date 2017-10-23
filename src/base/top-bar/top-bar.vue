@@ -24,8 +24,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {back, setStatusBarStyle} from 'common/js/native';
-  import {fixStatusBar} from 'common/js/api';
+  import {back} from 'common/js/native';
+  import {ISAPP, fixStatusBar} from 'common/js/api';
 
   export default {
     props: {
@@ -61,8 +61,7 @@
       },
       _fixStatusBar () {
         // 适配iOS 7+，Android 4.4+状态栏
-        fixStatusBar(this.$refs.bar);
-        setStatusBarStyle('light');
+        ISAPP && fixStatusBar(this.$refs.bar);
       }
     },
     computed: {

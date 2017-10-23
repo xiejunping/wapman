@@ -1,4 +1,4 @@
-import Dialog from 'base/dialog/vc-dialog.vue';
+import Dialog from 'base/dialog/vc-dialog';
 
 let $vm;
 

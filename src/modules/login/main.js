@@ -1,10 +1,11 @@
 import 'common/js/global';
 import Vue from 'vue';
 import App from './App';
-import {apiReady} from 'common/js/native';
+import {apiReady, disableBack} from 'common/js/native';
 
 /* eslint-disable no-new */
-apiReady(() => {
+apiReady().then(() => {
+  disableBack();
   console.log(navigator.appVersion);
   new Vue({
     el: '#app',

@@ -35,7 +35,7 @@
     top: 1.8rem
 
     &.dropmenu-fade-enter-active
-      animation: drop-fadein 0.3s
+      animation: drop-fade 0.3s
       .dropmenu-content
         animation: drop-zoom 0.3s
 
@@ -80,7 +80,9 @@
 
   @keyframes drop-zoom
     0%
+      background-color: rgba($c_black, 0)
       transform: scale(0)
     100%
+      background-color: rgba($c_black, .8)
       transform: scale(1)
 </style>

@@ -89,7 +89,7 @@
       p
         padding: .214rem 0
       span
-        font-size: $t_4
+        font-size: $t_3
 
   .c-middle
     width: 3rem
@@ -103,5 +103,5 @@
     width: 6rem
     left: 50%
     margin-left: -3rem
-    bottom: 1.275rem
+    bottom: 2.2rem
 </style>

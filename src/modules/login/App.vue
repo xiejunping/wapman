@@ -5,47 +5,6 @@
     </div>
 
     <div class="g-container">
-
-      <!--<div class="g-box">
-        <div class="g-row login-form">
-          <div class="g-col">
-            <input-group type="tel" v-model="tel" addon="手机号" placeholder="请输入手机号"></input-group>
-          </div>
-          <div class="g-col">
-            <input-group type="text" v-model="vcode" addon="验证码" placeholder="请输入验证码" :btn="code"></input-group>
-          </div>
-        </div>
-      </div>
-
-      <div class="g-box">
-        <div class="g-row login-button">
-          <div class="g-col">
-            <vc-button v-if="sign">登录<ins>...</ins></vc-button>
-            <vc-button v-else @click="login">登录</vc-button>
-          </div>
-        </div>
-      </div>
-
-      <div class="g-box">
-        <div class="g-row login-form">
-          <div class="g-col">
-            <input-group type="tel" v-model="tel" placeholder="请输入手机号码"></input-group>
-          </div>
-          <div class="g-col">
-            <input-group type="password" v-model="vcode" placeholder="请输入验证码" :btn="code"></input-group>
-          </div>
-        </div>
-      </div>
-
-      <div class="g-box">
-        <div class="g-row login-button">
-          <div class="g-col">
-            <vc-button v-if="sign">登录<ins>...</ins></vc-button>
-            <vc-button v-else @click="login">登录</vc-button>
-          </div>
-        </div>
-      </div>-->
-
       <div class="g-box">
         <div class="g-row login-form">
           <div class="g-col">
@@ -90,8 +49,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {getStorage} from 'common/js/api';
+  import {ISAPP, getStorage, setStorage} from 'common/js/api';
   import {open, sendEvent} from 'common/js/native';
+  import {error} from 'common/js/toast';
   import {userLogin} from 'api/user';
 
   import Page from 'components/page/page';
@@ -107,6 +67,14 @@
       };
     },
     methods: {
+      _init () {
+        let userData = getStorage('userData');
+        if (userData && userData.id) {
+          this.$router.replace({
+            name: 'index'
+          });
+        } else this.name = this.name || getStorage('userCode');
+      },
       login() {
         this.sign = true;
         userLogin({
@@ -117,12 +85,22 @@
           this.offline = false;
           this.sign = false;
           this.pass = '';
-          sendEvent('login', data);
+          ISAPP ? sendEvent('login', data) : this.success(data);
+        }, err => {
+          this.sign = false;
+          error(err);
         }, err => {
           if (err) {
             this.show = true;
             this.offline = true;
           }
+        });
+      },
+      success(data) {
+        setStorage('userData', data);
+        setStorage('token', data.token);
+        this.$router.push({
+          name: 'index'
         });
       },
       forget () {
@@ -145,7 +123,12 @@
       }
     },
     created() {
-      this.name = this.name || getStorage('userCode');
+      this._init();
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.$el.querySelector('.vc-page-content').style.height = '100%';
+      });
     },
     components: {Page, InputGroup, VcButton}
   };

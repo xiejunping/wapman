@@ -110,7 +110,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {sendEvent} from 'common/js/native';
+  import {ISAPP, getStorage, setStorage, clearStorage} from 'common/js/api';
+  import {open, sendEvent} from 'common/js/native';
 
   // 接口数据
   import {userGetInfo, uploadAvatar} from 'api/user'; // userUpdateInfo
@@ -175,9 +176,18 @@
             text: '确定',
             handle() {
               me.$dialog.close();
-              sendEvent('loginout');
+              ISAPP ? sendEvent('loginout') : me.loginout();
             }
           }
+        });
+      },
+      loginout() {
+        let userData = getStorage('userData');
+        clearStorage();
+        userData && setStorage('userCode', userData.name);
+        open({
+          name: 'root',
+          url: './root.html'
         });
       },
       imgoutput(base64) {

@@ -43,3 +43,13 @@ export function timeout(ms) {
   });
 }
 
+export function maskText(str, start, len) {
+  let arr = str.split(''), index = 0;
+  arr.forEach(function (t, i) {
+    if (i >= start && index < len) {
+      arr[i] = '*';
+      index++;
+    }
+  });
+  return arr.join('');
+}

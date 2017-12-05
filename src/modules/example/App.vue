@@ -4,6 +4,12 @@
       <top-bar title="首页" :right="right" :left="left"></top-bar>
     </div>
 
+    <!--<div class="app">-->
+    <!--<h2>首页</h2>-->
+
+    <!--<p>Hello Word!</p>-->
+    <!--</div>-->
+
     <div class="g-row g-list-padding">
       <div class="g-col-8 g-box">
         <span @click="a">Toast: 提交中</span>
@@ -45,10 +51,12 @@
       <!--<loader/>-->
       <!--<spinner indeterminate></spinner>-->
     </div>
+
   </page>
 </template>
 
 <script type="text/ecmascript-6">
+  import {getStorage} from 'common/js/api';
   import {open} from 'common/js/native';
   import Page from 'components/page/page';
   import TopBar from 'base/top-bar/top-bar';
@@ -69,29 +77,41 @@
     data() {
       return {
         left: {
-          icon: 'icon-searchlist',
+          icon: '',
           handle() {
-            open({
-              name: 'search',
-              url: './search.html'
-            });
           }
         },
         right: [{
-          icon: 'icon-settings',
+          icon: 'icon-my',
           handle() {
             open({
-              name: 'repairfill',
+              name: 'user',
               url: './user.html'
+            });
+          }
+        }, {
+          icon: 'icon-scan',
+          handle() {
+            open({
+              name: 'contact',
+              url: './contact.html'
             });
           }
         }],
         ac: '2017-11-06 00:02:42',
         s: userImg,
-        bimg: 'http://ozlfpjl4f.bkt.clouddn.com/blog/ghost/bd76dfbd832934ff1f0b32abce74f0a1.png'
+        bimg: 'http://owsks8a4c.bkt.clouddn.com/20171009175457_1bf87db21632363db98266207403a0e6'
       };
     },
     methods: {
+      _init () {
+        let userData = getStorage('userData');
+        if (!userData || !userData.id) {
+          this.$router.replace({
+            name: 'login'
+          });
+        }
+      },
       a() {
         this.$toast.loading('提交中');
       },
@@ -108,8 +128,14 @@
         window.api.alert({msg: base64});
       }
     },
+    created () {
+      this._init();
+    },
     components: {Page, TopBar, Loading, Loader, LoaderRack, Spinner, VcImage, Avatar}
   };
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus"></style>
+<style scoped lang="stylus">
+
+
+</style>

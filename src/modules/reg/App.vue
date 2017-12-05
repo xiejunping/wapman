@@ -108,6 +108,9 @@
             timeout(3000).then(() => this.login());
           }
         }, err => {
+          this.sign = false;
+          error(err);
+        }, err => {
           if (err) {
             this.show = false;
             this.offline = true;

@@ -4,11 +4,28 @@
  */
 
 import axios from 'axios';
+import Raven from 'raven-js';
 import {HOST_API, CODE_OK, CODE_ERR} from 'api/config';
 import {error} from 'common/js/toast';
 import {getStorage} from 'common/js/api';
 import {timeout} from 'common/js/utils';
 import {sendEvent} from 'common/js/native';
+
+// 蜂控日志 接口
+function ravenJs(option, res, err) {
+  if (process.env.NODE_ENV !== 'production') return;
+  Raven.captureMessage(HOST_API + option.url, {
+    level: 'info',
+    extra: {
+      type: option.type,
+      url: HOST_API + option.url,
+      data: option.data,
+      params: option.params,
+      response: res,
+      error: err
+    }
+  });
+}
 
 export default function (option) {
   option = Object.assign({}, {
@@ -39,7 +56,7 @@ export default function (option) {
     },
     maxContentLength: 2000
   }).then(res => {
-    console.log(res);
+    ravenJs(option, res);
     let body = res.data || {};
     if (CODE_OK === body.ret) {
       if (typeof body.data === 'undefined') {
@@ -60,5 +77,6 @@ export default function (option) {
     }
   }).catch(err => {
     option.faild(err);
+    ravenJs(option, 'error', err);
   });
 };

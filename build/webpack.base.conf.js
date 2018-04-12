@@ -62,6 +62,7 @@ module.exports = {
           publicPath: '../../'
         }
       }
-    ]
+    ],
+    noParse: [/moment-with-locales/]
   }
 };

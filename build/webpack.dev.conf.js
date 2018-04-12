@@ -26,6 +26,7 @@ let devConfig = merge(baseWebpackConfig, {
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     new FriendlyErrorsPlugin()
   ]
 })

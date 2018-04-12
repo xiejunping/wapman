@@ -59,7 +59,7 @@
   import VcButton from 'base/button/vc-button';
 
   export default {
-    data () {
+    data() {
       return {
         name: '',
         pass: '',
@@ -67,7 +67,7 @@
       };
     },
     methods: {
-      _init () {
+      _init() {
         let userData = getStorage('userData');
         if (userData && userData.id) {
           this.$router.replace({
@@ -103,7 +103,7 @@
           name: 'index'
         });
       },
-      forget () {
+      forget() {
         open({
           name: 'forget',
           url: './forget.html'

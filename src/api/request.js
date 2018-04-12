@@ -14,7 +14,7 @@ import {sendEvent} from 'common/js/native';
 // 蜂控日志 接口
 function ravenJs(option, res, err) {
   if (process.env.NODE_ENV !== 'production') return;
-  Raven.captureMessage(HOST_API + option.url, {
+  Raven.captureMessage(getStorage('userData').name, {
     level: 'info',
     extra: {
       type: option.type,

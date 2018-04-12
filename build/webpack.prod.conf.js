@@ -68,6 +68,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     // copy custom static assets
     new CopyWebpackPlugin([
       {

@@ -8,6 +8,6 @@
 
 
 [GitHub](https://github.com/xiejunping/wapman)
-[Get Started](#)
+[Get Started](#wapman)
 
 

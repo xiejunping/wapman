@@ -13,27 +13,38 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { addEvent, back } from 'common/js/native';
 
-  export default {
-    data() {
-      return {};
-    },
-    methods: {
-      _scal () {
-        let page = this.$refs.page.offsetHeight,
-          top = this.$refs.top.offsetHeight,
-          foot = this.$refs.foot.offsetHeight;
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    _scal () {
+      const page = this.$refs.page.offsetHeight;
+      const top = this.$refs.top.offsetHeight;
+      const foot = this.$refs.foot.offsetHeight;
+      const content = page - top - foot;
 
-        this.$refs.content.style.height = page - top - foot + 'px';
-      }
-    },
-    mounted () {
-      this.$nextTick(() => {
-        this._scal();
+      this.$emit('position', {
+        top, foot, content
       });
-    },
-    components: {}
-  };
+      this.$refs.content.style.height = content + 'px';
+    }
+  },
+  beforeCreate () {
+    addEvent('keyback').then(() => {
+      back();
+    }).catch(e => {
+      alert(e);
+    });
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this._scal();
+    });
+  }
+};
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

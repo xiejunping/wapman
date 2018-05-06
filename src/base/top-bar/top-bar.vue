@@ -92,7 +92,6 @@
     $clear()
     position: relative
     background: $c_base
-    border-bottom: solid 1px $c_gray
 
     .c-square
       text-align: center

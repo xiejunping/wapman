@@ -15,8 +15,43 @@ export function trimAll(str) {
   return str.replace(/\s*/g, '');
 }
 
+/**
+ * 是否DOM对象
+ * @param {Object} obj
+ * @returns {boolean}
+ */
 export function isElement(obj) {
-  return !!(obj && obj.nodeType === 1);
+  const result = !!(obj && obj.nodeType === 1);
+  if (!result) console.warn('This function need el param, el param must be DOM Element');
+  return result;
+}
+
+/**
+ * 存在类名
+ * @param {*} el
+ * @param {String} cls
+ * @returns {boolean}
+ */
+export function hasCls(el, cls) {
+  if (!isElement(el)) return;
+  return el.className.indexOf(cls) > -1;
+}
+
+/**
+ * 增加类名
+ * @param {*} el
+ * @param {String} cls
+ * @returns {*} el
+ */
+export function addCls(el, cls) {
+  if (!isElement(el) || hasCls(el, cls)) return;
+  if ('classList' in el) el.classList.add(cls);
+  else {
+    const preCls = el.className;
+    const newCls = `${preCls} ${cls}`;
+    el.className = newCls;
+  }
+  return el;
 }
 
 export function setStorage(key, value) {

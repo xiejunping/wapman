@@ -138,13 +138,25 @@
       },
       contact() {
         open({
-          name: '',
-          url: ''
+          name: 'webview',
+          url: './webview.html',
+          pageParam: {
+            title: 'Apicloud',
+            url: 'https://www.apicloud.com'
+          }
         });
       },
       service () {
         console.log(this.tel, this.vcode);
-        console.log('a', 'b');
+        open({
+          name: 'webview',
+          url: './webview.html',
+          pageParam: {
+            title: '我的后台页面',
+            url: './slider.html',
+            bounces: true
+          }
+        });
       }
     },
     components: {Page, TopBar, InputGroup, VcButton}

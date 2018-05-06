@@ -131,7 +131,7 @@
 
   export default {
     mixins: [upLoad],
-    data () {
+    data() {
       return {
         // 页面框架
         show: null,

@@ -16,9 +16,14 @@ export function apiReady() {
 
 export function open(option) {
   option = Object.assign({}, option, {
-    slidBackEnabled: false,
+    // Android
+    overScrollMode: 'scrolls',
+    // iOS
+    slidBackEnabled: true,
+    slidBackType: 'edge',
     // useWKWebView: true, // ios打开卡顿一下，黑色背景
-    historyGestureEnabled: true
+    historyGestureEnabled: true,
+    hideHomeIndicator: true
   });
 
   if (window.api) {
@@ -36,11 +41,39 @@ export function open(option) {
   }
 }
 
+export function openFrame({url, name, rect = {x: 0, y: 0, w: 'auto', h: 'auto'}, pageParam = {}, bounces}) {
+  // 处理dpi转换的情况
+  const docEl = window.document.documentElement;
+  const dpr = parseInt(docEl.getAttribute('data-dpr'), 10);
+  const option = {
+    url,
+    name,
+    rect,
+    pageParam,
+    bounces,
+    useWKWebView: true,
+    progress: {
+      type: 'page',
+      color: '#45C01A'
+    },
+    hScrollBarEnabled: false,
+    overScrollMode: 'scrolls'
+  };
+  if (typeof option.rect.x === 'number') option.rect.x /= dpr;
+  if (typeof option.rect.y === 'number') option.rect.y /= dpr;
+  if (typeof option.rect.w === 'number') option.rect.w /= dpr;
+  if (typeof option.rect.h === 'number') option.rect.h /= dpr;
+  if (window.api) {
+    window.api.openFrame(option);
+  }
+}
+
 export function back(name) {
   if (window.api) {
     window.api.historyBack({
       frameName: name
     }, (ret, err) => {
+      setScreen('portrait_up');
       !ret.status && window.api.closeWin();
     });
   } else {
@@ -54,11 +87,19 @@ export function backTo(name) {
   });
 }
 
-export function disableBack() {
-  let first,
-    msg = `再按一次退出${window.api.appName}`;
+export function getParams() {
+  if (window.api) {
+    return window.api.pageParam;
+  } else {
+    return window.$api.getStorage('pageparams', 'object');
+  }
+};
 
-  addEvent('keyback', ret => {
+export function disableBack() {
+  let first;
+  const msg = `再按一次退出${window.api.appName}`;
+
+  addEvent('keyback').then(ret => {
     if (!first) {
       first = new Date().getTime();
       window.api.toast({
@@ -76,17 +117,65 @@ export function disableBack() {
         });
       }
     }
+  }).catch(e => {
+    alert(e);
   });
 }
 
-export function addEvent(name, callback) {
+export function setRefreshHeader() {
+  const option = {
+    bgColor: '#f2f2f2',
+    textColor: '#999',
+    textDown: '下拉刷新...',
+    textUp: '松开刷新...'
+  };
   if (window.api) {
-    window.api.addEventListener({
-      name: name
-    }, (ret, err) => {
-      let data = ret && ret.value || {};
-      if (err && err.msg) error(err.msg);
-      callback(data);
+    return new Promise((resolve, reject) => {
+      window.api.setRefreshHeaderInfo(option, (ret, err) => {
+        console.log('ret:' + JSON.stringify(ret));
+        console.log('err:' + err);
+        if (err) reject(err);
+        else {
+          // window.api.refreshHeaderLoading();
+          resolve(ret);
+        }
+      });
+    });
+  } else {
+    console.log('api is not be found in setRefreshHeader');
+  }
+}
+
+export function setFullScreen(bool) {
+  if (window.api) {
+    window.api.setFullScreen({
+      fullScreen: bool
+    });
+  } else {
+    console.log('api is not be found in setFullScreen');
+  }
+}
+
+export function setScreen(direction) {
+  if (window.api) {
+    window.api.setScreenOrientation({
+      orientation: direction
+    });
+  } else {
+    console.log('api is not be found in setScreen');
+  }
+}
+
+export function addEvent(name) {
+  if (window.api) {
+    return new Promise((resolve, reject) => {
+      window.api.addEventListener({
+        name: name
+      }, (ret, err) => {
+        let data = ret && ret.value || {};
+        if (err && err.msg) reject(err.msg);
+        resolve(data);
+      });
     });
   } else {
     console.warn('api is not be found in addEvent');
@@ -153,11 +242,15 @@ export function hideProgress() {
 export function openPage() {
   if (window.api) {
     loadingShow('加载中');
-    addEvent('removePage', ret => {
+    addEvent('removePage').then(ret => {
       toastClose();
       removeEvent('removePage');
+    }).catch(e => {
+      alert(e);
     });
-    addEvent('viewdisappear', ret => sendEvent('removePage'));
+    addEvent('viewdisappear').then(ret => sendEvent('removePage')).catch(e => {
+      alert(e);
+    });
   } else {
     console.warn('api is not be found in openPage');
   }

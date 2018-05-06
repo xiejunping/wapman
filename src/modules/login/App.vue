@@ -77,6 +77,14 @@
       },
       login() {
         this.sign = true;
+        open({
+          name: 'webview',
+          url: './webview.html',
+          pageParam: {
+            title: '教研活动直播回放',
+            url: 'http://p889c49de.bkt.clouddn.com/video/video.html?userId=0e674be49a5e4feeab1d15d9a159e9a3'
+          }
+        });
         userLogin({
           name: this.name,
           password: this.pass

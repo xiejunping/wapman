@@ -10,13 +10,11 @@ import router from './router';
 /* eslint-disable no-new */
 apiReady().then(() => {
   // 监听事件
-  addEvent('home', ret => eventHome());
-  addEvent('login', ret => eventLogin(ret));
-  addEvent('loginout', ret => eventLoginOut());
+  addEvent('home').then(ret => eventHome()).catch(e => { alert(e); });
+  addEvent('login').then(ret => eventLogin(ret)).catch(e => { alert(e); });
+  addEvent('loginout').then(ret => eventLoginOut()).catch(e => { alert(e); });
 
-  timeout(2000).then(() => {
-    removeLaunch(2000);
-  });
+  timeout(2000).then(() => removeLaunch(2000));
 
   // 路由模式
   let Vm = new Vue({

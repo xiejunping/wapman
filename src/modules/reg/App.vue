@@ -14,7 +14,7 @@
             <input-group type="password" v-model="pass" placeholder="请输入密码"></input-group>
           </div>
           <div class="g-col">
-            <input-group type="password" v-model="password" placeholder="请再次输入密码"></input-group>
+            <input-group type="password" v-model="password" placeholder="请再次输入密码" @onBlur="confirm"></input-group>
           </div>
           <div class="g-col">
             <input-group type="tel" v-model="tel" placeholder="请输入手机号码" :btn="code"></input-group>
@@ -57,6 +57,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import sha256 from 'sha256';
+
   import {open, back} from 'common/js/native';
   import {error} from 'common/js/toast';
   import {timeout} from 'common/js/utils';
@@ -93,17 +95,25 @@
       login() {
         back();
       },
+      confirm() {
+        if (!this.pass) {
+          error('请输入密码');
+        } else if (!this.password) {
+          error('请确认密码');
+        } else if (this.pass !== this.password) {
+          error('两次输入的密码不一致');
+        }
+      },
       register() {
         this.sign = true;
         userRegister({
-          name: this.name,
-          pass: this.pass,
-          password: this.password,
+          username: this.name,
+          password: sha256(this.pass),
           code: this.vcode,
-          tel: this.tel
+          phone: this.tel
         }, data => {
           this.sign = false;
-          if (data.id) {
+          if (data) {
             error('注册成功');
             timeout(3000).then(() => this.login());
           }
@@ -120,18 +130,19 @@
       getcode() {
         // 手机号占用
         phoneExists({
-          tel: this.tel
+          phone: this.tel
         }, data => {
-          this.sendCode();
+          if (data) error('该手机号已经注册');
+          else this.sendCode();
         }, err => {
           err && console.log('offline');
         });
       },
       sendCode() {
         getCode({
-          tel: this.tel
+          phone: this.tel
         }, data => {
-          error(data);
+          data && error(data);
         }, err => {
           err && console.log('offline');
         });

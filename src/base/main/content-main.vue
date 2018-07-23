@@ -66,6 +66,8 @@
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
+  .g-wrapper
+    font-size: $t_4
   .vc-main
     height: inherit
     .main-list

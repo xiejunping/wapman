@@ -204,6 +204,30 @@ export function sendEvent(name, extra = {}) {
   }
 }
 
+export function execScript({winName, frmName, jsfun}) {
+  if (window.api) {
+    if (!winName) {
+      window.api.execScript({
+        frameName: frmName,
+        script: jsfun
+      });
+    } else if (!frmName) {
+      window.api.execScript({
+        name: winName,
+        script: jsfun
+      });
+    } else {
+      window.api.execScript({
+        name: winName,
+        frameName: frmName,
+        script: jsfun
+      });
+    }
+  } else {
+    console.warn('api is not be found in execScript');
+  }
+}
+
 export function setStatusBarStyle(val) {
   if (window.api) {
     window.api.setStatusBarStyle({

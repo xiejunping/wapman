@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import 'common/styles/index.styl';
 import Vue from 'vue';
-import fastclick from 'fastclick';
 
 // 插件式组件
 import Dialog from 'common/plugins/dialog';
@@ -26,5 +25,3 @@ if (process.env.NODE_ENV === 'production') {
 for (let key in Filter) {
   Vue.filter(key, Filter[key]);
 }
-
-fastclick.attach(document.body);

@@ -1,5 +1,5 @@
-export const CODE_OK = 200;
-export const CODE_ERR = 501;
+export const CODE_OK = 0;
+export const CODE_ERR = 110;
 /* eslint-disable */
 export const HOST_API = process.env.NODE_ENV === 'production' ?
   'http://localhost:5000' : //'http://www.jsvue.com'

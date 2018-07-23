@@ -17,7 +17,7 @@
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'dialog',
+    name: 'vc-dialog',
     props: {
       title: {
         type: String,

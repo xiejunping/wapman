@@ -69,7 +69,7 @@ export default function (option) {
       }
     } else if (CODE_ERR === body.ret) {
       error('登陆信息失效，请重新登录');
-      timeout(3000).then(() => sendEvent('loginout'));
+      timeout(3000).then(() => sendEvent('logout', true));
     } else {
       body.msg = body.msg.replace(/非法请求：/g, '');
       if (option.error) {

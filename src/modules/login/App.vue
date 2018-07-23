@@ -49,6 +49,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import sha256 from 'sha256';
+
   import {ISAPP, getStorage, setStorage} from 'common/js/api';
   import {open, sendEvent} from 'common/js/native';
   import {error} from 'common/js/toast';
@@ -67,7 +69,7 @@
       };
     },
     methods: {
-      _init() {
+      init() {
         let userData = getStorage('userData');
         if (userData && userData.id) {
           this.$router.replace({
@@ -77,23 +79,17 @@
       },
       login() {
         this.sign = true;
-        // open({
-        //   name: 'webview',
-        //   url: './webview.html',
-        //   pageParam: {
-        //     title: '教研活动直播回放',
-        //     url: 'http://p889c49de.bkt.clouddn.com/video/h5video.html?userId=0e674be49a5e4feeab1d15d9a159e9a3'
-        //   }
-        // });
         userLogin({
           username: this.name,
-          password: this.pass
+          password: sha256(this.pass)
         }, data => {
           this.show = true;
           this.offline = false;
           this.sign = false;
           this.pass = '';
-          ISAPP ? sendEvent('login', data) : this.success(data);
+          setStorage('userData', data);
+          // setStorage('token', data.token);  暂不用token
+          ISAPP ? sendEvent('login', data) : this.success();
         }, err => {
           this.sign = false;
           error(err);
@@ -104,9 +100,7 @@
           }
         });
       },
-      success(data) {
-        setStorage('userData', data);
-        setStorage('userCode', data.name);
+      success() {
         this.$router.push({
           name: 'index'
         });
@@ -131,7 +125,7 @@
       }
     },
     created() {
-      this._init();
+      this.init();
     },
     mounted() {
       this.$nextTick(() => {

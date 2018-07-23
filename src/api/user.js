@@ -13,7 +13,7 @@ export function userLogin(params, callback, error, faild) {
 
 export function userRegister(params, callback, error, faild) {
   Req({
-    url: '/index.php?s=User_User.Register',
+    url: '/user/register',
     type: 'POST',
     data: params,
     success: res => callback(res),

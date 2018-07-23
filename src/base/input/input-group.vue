@@ -1,53 +1,21 @@
 <template>
   <div class="vc-input" :class="group">
     <span v-if="addon" class="vc-input-addon" v-html="addon"></span>
-    <input v-if="type === 'tel'"
-           type="tel"
+    <input :type="type"
            v-model="inputxt"
            class="vc-form-control"
            :placeholder="placeholder"
            :disabled="disabled"
            :readonly="readonly"
-           @focus="onFocus"
-           @blur="onBlur"
-           @input="onInput"/>
-    <input v-else-if="type === 'number'"
-           type="number"
-           v-model="inputxt"
-           class="vc-form-control"
-           :placeholder="placeholder"
-           :disabled="disabled"
-           :readonly="readonly"
-           @focus="onFocus"
-           @blur="onBlur"
-           @input="onInput"/>
-    <input v-else-if="type === 'password'"
-           type="password"
-           v-model="inputxt"
-           class="vc-form-control"
-           :placeholder="placeholder"
-           :disabled="disabled"
-           :readonly="readonly"
-           @focus="onFocus"
-           @blur="onBlur"
-           @input="onInput"/>
-    <input v-else="type === 'text'"
-           type="text"
-           v-model="inputxt"
-           class="vc-form-control"
-           :placeholder="placeholder"
-           :disabled="disabled"
-           :readonly="readonly"
-           @focus="onFocus"
-           @blur="onBlur"
-           @input="onInput"/>
+           @focus="$emit('onFocus')"
+           @blur="$emit('onBlur')"/>
     <span v-if="btn" class="vc-input-btn" v-html="btn.text" @click="btn.handle"></span>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'input',
+    name: 'input-group',
     props: {
       value: {
         type: [String, Number]
@@ -72,7 +40,7 @@
         default: 'input-group'
       },
       type: {
-        type: String,
+        type: String, // type 支持在vue 2.5.0 以上
         default: 'text'
       },
       size: {

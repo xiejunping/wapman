@@ -2,8 +2,7 @@ import Req from 'api/request';
 
 export function phoneExists(params, callback, error) {
   Req({
-    url: '/index.php?s=Common.PhoneExists',
-    type: 'POST',
+    url: '/user/check',
     params: params,
     success: res => callback(res),
     faild: err => error(err)
@@ -12,9 +11,9 @@ export function phoneExists(params, callback, error) {
 
 export function getCode(params, callback, error) {
   Req({
-    url: '/index.php?s=Common.GetCode',
+    url: '/user/code',
     type: 'POST',
-    params: params,
+    data: params,
     success: res => callback(res),
     faild: err => error(err)
   });

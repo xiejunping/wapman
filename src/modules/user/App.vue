@@ -176,16 +176,16 @@
           confirm: {
             text: '确定',
             handle() {
+              const { name } = getStorage('userData');
               me.$dialog.close();
-              ISAPP ? sendEvent('loginout') : me.loginout();
+              clearStorage();
+              name && setStorage('userCode', name);
+              ISAPP ? sendEvent('logout', true) : me.loginout();
             }
           }
         });
       },
       loginout() {
-        let userData = getStorage('userData');
-        clearStorage();
-        userData && setStorage('userCode', userData.name);
         open({
           name: 'root',
           url: './root.html'

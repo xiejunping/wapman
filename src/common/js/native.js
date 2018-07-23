@@ -179,6 +179,7 @@ export function addEvent(name) {
     });
   } else {
     console.warn('api is not be found in addEvent');
+    return Promise.resolve();
   }
 }
 

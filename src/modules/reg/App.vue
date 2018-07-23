@@ -186,7 +186,7 @@
     background-color: $c_white
 
   .login-reg
-    font-size: $t_3
+    font-size: $t_4
     color: $c_light_color
     span
       color: $c_color

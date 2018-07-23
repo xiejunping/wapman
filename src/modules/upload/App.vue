@@ -2,7 +2,7 @@
   <page>
     <top-bar title="图片上传七牛demo"></top-bar>
 
-    <content-main>
+    <content-main noscroll="true">
       <div class="g-box">
 
       </div>

@@ -4,10 +4,11 @@
  */
 
 import axios from 'axios';
+import qs from 'qs';
 // import Raven from 'raven-js';
 import {HOST_API, CODE_OK, CODE_ERR} from 'api/config';
 import {error} from 'common/js/toast';
-import {getStorage} from 'common/js/api';
+// import {getStorage} from 'common/js/api';
 import {timeout} from 'common/js/utils';
 import {sendEvent} from 'common/js/native';
 
@@ -32,9 +33,12 @@ export default function (option) {
     type: 'GET',
     timeout: 30000,
     resType: 'json',
-    contentType: 'application/json'
+    contentType: 'application/x-www-form-urlencoded'
   }, option);
-
+  // json字符格式化成对象
+  if (option.contentType === 'application/x-www-form-urlencoded') {
+    option.data = qs.stringify(option.data);
+  }
   axios.request({
     baseURL: HOST_API,
     url: option.url,
@@ -43,10 +47,9 @@ export default function (option) {
     data: option.data,
     timeout: option.timeout,
     headers: {
-      'Token': getStorage('token'),
-      'Client': 'app'
+      'Content-Type': option.contentType
     },
-    withCredentials: false,
+    withCredentials: true,
     auth: {},
     responseType: option.resType,
     onUploadProgress: option.onUpload,
@@ -56,7 +59,7 @@ export default function (option) {
     },
     maxContentLength: 2000
   }).then(res => {
-    ravenJs(option, res);
+    // ravenJs(option, res);
     let body = res.data || {};
     if (CODE_OK === body.ret || body.code === 0) {
       if (typeof body.data === 'undefined') {

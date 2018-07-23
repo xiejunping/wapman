@@ -77,16 +77,16 @@
       },
       login() {
         this.sign = true;
-        open({
-          name: 'webview',
-          url: './webview.html',
-          pageParam: {
-            title: '教研活动直播回放',
-            url: 'http://p889c49de.bkt.clouddn.com/video/h5video.html?userId=0e674be49a5e4feeab1d15d9a159e9a3'
-          }
-        });
+        // open({
+        //   name: 'webview',
+        //   url: './webview.html',
+        //   pageParam: {
+        //     title: '教研活动直播回放',
+        //     url: 'http://p889c49de.bkt.clouddn.com/video/h5video.html?userId=0e674be49a5e4feeab1d15d9a159e9a3'
+        //   }
+        // });
         userLogin({
-          name: this.name,
+          username: this.name,
           password: this.pass
         }, data => {
           this.show = true;
@@ -106,7 +106,7 @@
       },
       success(data) {
         setStorage('userData', data);
-        setStorage('token', data.token);
+        setStorage('userCode', data.name);
         this.$router.push({
           name: 'index'
         });
@@ -154,7 +154,7 @@
     border: solid 1px $c_dark
     border-radius: .107rem
     background-color: $c_white
-    font-size: $t_3
+    font-size: $t_4
     .g-col:last-child
       border-top: solid 1px $c_light_dark
 
@@ -167,7 +167,7 @@
     background-color: $c_white
 
   .login-reg
-    font-size: $t_3
+    font-size: $t_2
     color: $c_light_color
     span
       color: $c_color

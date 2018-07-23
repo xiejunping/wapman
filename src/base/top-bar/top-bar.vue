@@ -121,7 +121,7 @@
 
     .c-bar-center
       margin: 0 $c_bar_height
-      font-size: $t_5
+      font-size: $t_7
       span
         $no-wrap()
         max-width: 70%

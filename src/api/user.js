@@ -2,9 +2,9 @@ import Req from 'api/request';
 
 export function userLogin(params, callback, error, faild) {
   Req({
-    url: '/index.php?s=User_User.Login',
+    url: '/user/login',
     type: 'POST',
-    params: params,
+    data: params,
     success: res => callback(res),
     error: err => error(err),
     faild: err => faild(err)
@@ -15,7 +15,7 @@ export function userRegister(params, callback, error, faild) {
   Req({
     url: '/index.php?s=User_User.Register',
     type: 'POST',
-    params: params,
+    data: params,
     success: res => callback(res),
     error: err => error(err),
     faild: err => faild(err)
@@ -24,7 +24,7 @@ export function userRegister(params, callback, error, faild) {
 
 export function userGetInfo(callback, error) {
   Req({
-    url: '/index.php?s=User_User.Getinfo',
+    url: '/user/info',
     success: res => callback(res),
     faild: err => error(err)
   });

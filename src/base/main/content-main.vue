@@ -2,7 +2,7 @@
   <div class="g-wrapper">
     <div v-if="show" class="vc-main">
       <Offline v-if="offline" @refresh="$emit('data', true)"></Offline>
-      <scroll v-else
+      <scroll v-else-if="!noscroll"
               @scroll="scroll"
               :data="data"
               :listen-scroll="listenScroll"
@@ -13,6 +13,9 @@
           <slot></slot>
         </div>
       </scroll>
+      <div v-else class="g-container">
+        <slot></slot>
+      </div>
     </div>
     <div v-else class="vc-loading">
       <spinner indeterminate></spinner>
@@ -29,7 +32,8 @@
     props: {
       mounted: Boolean,
       respond: Boolean,
-      offline: Boolean
+      offline: Boolean,
+      noscroll: Boolean
     },
     data() {
       return {

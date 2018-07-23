@@ -88,7 +88,7 @@
         }],
         ac: '2017-11-06 00:02:42',
         s: userImg,
-        bimg: 'http://ozlfpjl4f.bkt.clouddn.com/blog/ghost/bd76dfbd832934ff1f0b32abce74f0a1.png'
+        bimg: ''
       };
     },
     methods: {

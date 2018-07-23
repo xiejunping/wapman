@@ -7,7 +7,8 @@
     <content-main :mounted="show"
                   @data="getInfo"
                   :respond="respond"
-                  :offline="offline">
+                  :offline="offline"
+                  noscroll="true">
 
       <div class="m-panel g-spacer">
         <div class="g-list-padding-thiner vc-li-item">

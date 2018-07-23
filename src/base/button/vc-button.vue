@@ -34,23 +34,23 @@
       line-height: 1
       -webkit-user-select: none
 
-      font-size: $t_3
+      font-size: $t_5
       padding: .333rem 0
       border-radius: .134rem
 
       $active-block()
 
     .vc-btn-lg
-      font-size: $t_4
+      font-size: $t_7
       padding: 0 1.5rem
       border-radius: .25rem
 
     .vc-btn-sm
-      font-size: $t_2
+      font-size: $t_4
       padding: 0 1.2rem
 
     .vc-btn-xs
-      font-size: $t_1
+      font-size: $t_3
       padding: 0 1rem
 
     .vc-btn-primary

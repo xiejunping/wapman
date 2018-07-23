@@ -11,8 +11,8 @@ import router from './router';
 apiReady().then(() => {
   // 监听事件
   addEvent('home').then(ret => eventHome()).catch(e => { alert(e); });
-  addEvent('login').then(ret => eventLogin(ret)).catch(e => { alert(e); });
-  addEvent('loginout').then(ret => eventLoginOut()).catch(e => { alert(e); });
+  addEvent('login').then(ret => ret && eventLogin(ret)).catch(e => { alert(e); });
+  addEvent('loginout').then(ret => ret && eventLoginOut()).catch(e => { alert(e); });
 
   timeout(2000).then(() => removeLaunch(2000));
 

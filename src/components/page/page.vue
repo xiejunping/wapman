@@ -13,7 +13,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { addEvent, back } from 'common/js/native';
 
 export default {
   data() {
@@ -31,13 +30,6 @@ export default {
       });
       this.$refs.content.style.height = content + 'px';
     }
-  },
-  beforeCreate () {
-    addEvent('keyback').then(() => {
-      back();
-    }).catch(e => {
-      alert(e);
-    });
   },
   mounted () {
     this.$nextTick(() => {

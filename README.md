@@ -1,5 +1,8 @@
 # wapman
 
+### 该项目是一个前端平台 新上线对应的后台接口Api Resetful 平台 [wapman-admin https://github.com/xiejunping/wapman-admin](https://github.com/xiejunping/wapman-admin)
+如果使用想一起参与学习与使用，请在下方加群 或加我微信号 ![18163680885](http://wapman-1252359508.file.myqcloud.com/avatar/20180726104413TXNhlMME.png)
+
 #### vue 多页应用
 
 * 基于apicloud应用开发框架，结合现在最流行的vue前端框架，打造一个体验相对完美的手机app

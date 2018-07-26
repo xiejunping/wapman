@@ -140,3 +140,11 @@
   
     * 1、wapman_01  项目视频讲解第一课 项目的构建 链接: https://chuanke.baidu.com/v2503702-235599-1716888.html
     * 2、wapman_02  项目讲解第二课  ES6入门视频 链接: https://chuanke.baidu.com/v2503702-235599-1732384.html
+
+
+# 更新日志
+
+* [x] 2018-07-26 
+
+  * ApiCloud 中native中的监听事件改成Promise模式，解决回调难码代码的问题，暂时不稳定，可能手机调式时报错回是没有反应，记加上`Promise.resolve`
+  * fastClick 的引用去掉了，用Css的 `touch-action: manipulation` 加入到Reset.style中，解决300ms的点击延迟问题

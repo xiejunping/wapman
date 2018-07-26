@@ -148,3 +148,7 @@
 
   * ApiCloud 中native中的监听事件改成Promise模式，解决回调难码代码的问题，暂时不稳定，可能手机调式时报错回是没有反应，记加上`Promise.resolve`
   * fastClick 的引用去掉了，用Css的 `touch-action: manipulation` 加入到Reset.style中，解决300ms的点击延迟问题
+  * 登录、注册模块 改新后台平台接口 `nodejs` 写的后台，[wapman-admin](https://github.com/xiejunping/wapman-admin) 接口Api ResetFul 服务
+  * 输入框加图标选项  密码，输入框可以加交互体验
+  * 上传图像使用腾讯云COS服务 验证码使用腾讯云的免费 100/月的短信平台，高速稳定
+  

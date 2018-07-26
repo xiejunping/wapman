@@ -11,10 +11,10 @@
             <input-group type="text" v-model="name" placeholder="请输入用户名"></input-group>
           </div>
           <div class="g-col">
-            <input-group type="password" v-model="pass" placeholder="请输入密码"></input-group>
+            <input-group :type="passType" v-model="pass" placeholder="请输入密码" :icon="passIcon" @click="taggleIcon('pass')"></input-group>
           </div>
           <div class="g-col">
-            <input-group type="password" v-model="password" placeholder="请再次输入密码" @onBlur="confirm"></input-group>
+            <input-group :type="passwordType" v-model="password" placeholder="请再次输入密码" :icon="passwordIcon" @click="taggleIcon('password')" @onBlur="confirm"></input-group>
           </div>
           <div class="g-col">
             <input-group type="tel" v-model="tel" placeholder="请输入手机号码" :btn="code"></input-group>
@@ -31,7 +31,7 @@
             <vc-button v-if="sign">注册
               <ins>...</ins>
             </vc-button>
-            <vc-button v-else @click="register">注册</vc-button>
+            <vc-button v-else @click.native="register">注册</vc-button>
           </div>
         </div>
       </div>
@@ -57,11 +57,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import sha256 from 'sha256';
-
   import {open, back} from 'common/js/native';
   import {error} from 'common/js/toast';
-  import {timeout} from 'common/js/utils';
+  import {timeout, aesEncrypt} from 'common/js/utils';
 
   // 接口数据
   import {userRegister} from 'api/user';
@@ -80,10 +78,15 @@
         name: '',
         pass: '',
         password: '',
+        passType: 'password',
+        passwordType: 'password',
+        passIcon: 'icon-attention',
+        passwordIcon: 'icon-attention',
         tel: '',
         vcode: '',
         code: {
           text: '获取验证码',
+          visible: true,
           handle() {
             me.getcode();
           }
@@ -108,7 +111,7 @@
         this.sign = true;
         userRegister({
           username: this.name,
-          password: sha256(this.pass),
+          password: aesEncrypt(this.pass),
           code: this.vcode,
           phone: this.tel
         }, data => {
@@ -142,10 +145,23 @@
         getCode({
           phone: this.tel
         }, data => {
-          data && error(data);
+          data && this.timer(60);
         }, err => {
           err && console.log('offline');
         });
+      },
+      timer(num) {
+        this.code.visible = false;
+        clearTimeout(this.DTIME);
+        this.DTIME = setTimeout(() => {
+          if (num > 0) {
+            this.code.text = `(${num}s)重新获取`;
+            this.timer(--num);
+          } else {
+            this.code.text = '获取验证码';
+            this.code.visible = true;
+          }
+        }, 1000);
       },
       contact() {
         open({
@@ -168,6 +184,15 @@
             bounces: true
           }
         });
+      },
+      taggleIcon(type) {
+        if (this[`${type}Icon`] === 'icon-attention') {
+          this[`${type}Type`] = 'text';
+          this[`${type}Icon`] = 'icon-attentionfill';
+        } else {
+          this[`${type}Type`] = 'password';
+          this[`${type}Icon`] = 'icon-attention';
+        }
       }
     },
     components: {Page, TopBar, InputGroup, VcButton}

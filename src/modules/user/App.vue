@@ -8,7 +8,7 @@
                   @data="getInfo"
                   :respond="respond"
                   :offline="offline"
-                  noscroll="true">
+                  :noscroll="true">
 
       <div class="m-panel g-spacer">
         <div class="g-list-padding-thiner vc-li-item">
@@ -19,8 +19,9 @@
               </div>
             </div>
             <div class="g-col-4 m-info">
-              <h3>放牛王小二</h3>
-              <p>用户名: {{name}}</p>
+              <h3>{{nickname || '昵称：'}}</h3>
+              <p>会员号: {{id | fillZero}}</p>
+              <p>积&nbsp;&nbsp;&nbsp;分: {{score}}</p>
             </div>
             <div class="g-col-2"></div>
           </div>
@@ -31,13 +32,13 @@
         <div class="g-list-padding vc-li-item">
           <div class="g-row g-box">
             <div class="g-col-1 g-center">
-              <label for=""><i class="icon-profile"></i></label>
+              <label for=""><i class="icon-homefill"></i></label>
             </div>
-            <div class="g-col-3">
-              <label for="">昵称</label>
+            <div class="g-col-3 m-key">
+              <label for="">用户名</label>
             </div>
             <div class="g-col-4 g-right m-value">
-              <label for="">放牛王小二</label>
+              <label for="">{{name}}</label>
               <label for=""></label>
             </div>
           </div>
@@ -45,13 +46,13 @@
         <div class="g-list-padding vc-li-item">
           <div class="g-row g-box">
             <div class="g-col-1 g-center">
-              <label for=""><i class="icon-profile"></i></label>
+              <label for=""><i class="icon-mobilefill"></i></label>
             </div>
-            <div class="g-col-3">
+            <div class="g-col-3 m-key">
               <label for="">手机号</label>
             </div>
             <div class="g-col-4 g-right m-value">
-              <label for="">{{tel}}</label>
+              <label for="">{{tel | maskText(3, 4)}}</label>
               <label for=""></label>
             </div>
           </div>
@@ -59,10 +60,10 @@
         <div class="g-list-padding vc-li-item">
           <div class="g-row g-box">
             <div class="g-col-1 g-center">
-              <label for=""><i class="icon-profile"></i></label>
+              <label for=""><i class="icon-wefill"></i></label>
             </div>
-            <div class="g-col-3">
-              <label for="">身份证号</label>
+            <div class="g-col-3 m-key">
+              <label for="">邀请码</label>
             </div>
             <div class="g-col-4 g-right m-value">
               <label for="">{{cid}}</label>
@@ -73,9 +74,9 @@
         <div class="g-list-padding vc-li-item">
           <div class="g-row g-box">
             <div class="g-col-1 g-center">
-              <label for=""><i class="icon-profile"></i></label>
+              <label for=""><i class="icon-locationfill"></i></label>
             </div>
-            <div class="g-col-3">
+            <div class="g-col-3 m-key">
               <label for="">邮箱</label>
             </div>
             <div class="g-col-4 g-right m-value">
@@ -87,13 +88,13 @@
         <div class="g-list-padding vc-li-item">
           <div class="g-row g-box">
             <div class="g-col-1 g-center">
-              <label for=""><i class="icon-profile"></i></label>
+              <label for=""><i class="icon-friendfill"></i></label>
             </div>
-            <div class="g-col-3">
+            <div class="g-col-3 m-key">
               <label for="">性别</label>
             </div>
             <div class="g-col-4 g-right m-value">
-              <label for="">{{sex}}</label>
+              <label for="">{{sex ? '男' : '女'}}</label>
               <label for=""></label>
             </div>
           </div>
@@ -103,7 +104,7 @@
 
       <div class="g-list-padding g-row">
         <div class="g-col-8 g-box">
-          <vc-button @click="showDialog">退出登录</vc-button>
+          <vc-button @click.native="showDialog">退出登录</vc-button>
         </div>
       </div>
     </content-main>
@@ -139,10 +140,13 @@
         respond: null,
         offline: null,
         // 业务数据
+        id: '',
+        nickname: '',
         name: '',
         tel: '',
         email: '',
         cid: '',
+        score: 0,
         sex: '',
         avatar: userImg
       };
@@ -155,12 +159,15 @@
             this.show = true;
             this.offline = false;
             let userData = data;
+            userData.id && (this.id = userData.id);
+            userData.nickname && (this.nickname = userData.nickname);
             userData.avatar && (this.avatar = userData.avatar);
             userData.name && (this.name = userData.name);
-            userData.tel && (this.tel = userData.tel);
+            userData.phone && (this.tel = userData.phone);
             userData.email && (this.email = userData.email);
             userData.cid && (this.cid = userData.cid);
             userData.sex && (this.sex = userData.sex);
+            userData.score && (this.score = userData.score);
           }
         }, err => {
           if (err) {
@@ -193,11 +200,9 @@
       },
       imgoutput(base64) {
         uploadAvatar({
-          file: base64
+          avatar: base64
         }, data => {
-          if (data.code) {
-            this.getInfo();
-          }
+          if (data) this.getInfo();
         }, err => {
           if (err) {
             this.show = true;
@@ -241,11 +246,16 @@
 
     .m-value
       font-size: $t_2
+      line-height: .5rem
       color: $c_light_color
+    .m-key
+      line-height: .5rem
     .vc-li-item
       $active-block()
       width: 100%
       border-bottom: solid 1px $c_light_gray
+      i
+        font-size: .5rem
       &:last-child
         border-bottom: none
 

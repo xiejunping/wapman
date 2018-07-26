@@ -11,7 +11,7 @@
             <input-group type="text" v-model="name" placeholder="请输入用户名"></input-group>
           </div>
           <div class="g-col">
-            <input-group type="password" v-model="pass" placeholder="请输入密码"></input-group>
+            <input-group :type="passType" v-model="pass" placeholder="请输入密码" :icon="icon" @click="taggleIcon"></input-group>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
             <vc-button v-if="sign">登录
               <ins>...</ins>
             </vc-button>
-            <vc-button v-else @click="login">登录</vc-button>
+            <vc-button v-else @click.native="login">登录</vc-button>
           </div>
         </div>
       </div>
@@ -49,12 +49,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import sha256 from 'sha256';
-
   import {ISAPP, getStorage, setStorage} from 'common/js/api';
   import {open, sendEvent} from 'common/js/native';
   import {error} from 'common/js/toast';
   import {userLogin} from 'api/user';
+  import {aesEncrypt} from 'common/js/utils';
 
   import Page from 'components/page/page';
   import InputGroup from 'base/input/input-group';
@@ -65,6 +64,8 @@
       return {
         name: '',
         pass: '',
+        passType: 'password',
+        icon: 'icon-attention',
         sign: false
       };
     },
@@ -81,7 +82,7 @@
         this.sign = true;
         userLogin({
           username: this.name,
-          password: sha256(this.pass)
+          password: aesEncrypt(this.pass)
         }, data => {
           this.show = true;
           this.offline = false;
@@ -122,6 +123,15 @@
           name: '',
           url: ''
         });
+      },
+      taggleIcon() {
+        if (this.icon === 'icon-attention') {
+          this.passType = 'text';
+          this.icon = 'icon-attentionfill';
+        } else {
+          this.passType = 'password';
+          this.icon = 'icon-attention';
+        }
       }
     },
     created() {

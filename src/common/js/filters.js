@@ -33,3 +33,22 @@ export function datetimeToMinOpt (val) {
     sameElse: FMT + MT
   }) : DATE;
 }
+
+// 会员号补零
+export function fillZero(val) {
+  if (typeof val !== 'number') val = parseInt(val, 10);
+  if (val.toString().length < 8) val += 60000000;
+  return val.toString();
+}
+
+// 掩码
+export function maskText(str, start, len) {
+  let arr = str.split(''), index = 0;
+  arr.forEach(function (t, i) {
+    if (i >= start && index < len) {
+      arr[i] = '*';
+      index++;
+    }
+  });
+  return arr.join('');
+}

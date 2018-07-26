@@ -42,9 +42,9 @@ export function userUpdateInfo(params, callback, error) {
 
 export function uploadAvatar(params, callback, error) {
   Req({
-    url: '/index.php?s=User_User.Uploadavatar',
+    url: '/user/update/avatar',
     type: 'POST',
-    params: params,
+    data: params,
     success: res => callback(res),
     faild: err => error(err)
   });

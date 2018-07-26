@@ -9,7 +9,16 @@
            :readonly="readonly"
            @focus="$emit('onFocus')"
            @blur="$emit('onBlur')"/>
-    <span v-if="btn" class="vc-input-btn" v-html="btn.text" @click="btn.handle"></span>
+    <span v-if="btn"
+          class="vc-input-btn"
+          :class="{'vc-btn-disabled': !btn.visible}"
+          v-html="btn.text"
+          @click="btnEvent"></span>
+    <span v-else-if="icon"
+          class="vc-input-icon"
+          @click="$emit('click')">
+      <i :class="icon"></i>
+    </span>
   </div>
 </template>
 
@@ -31,6 +40,9 @@
       },
       btn: {
         type: Object
+      },
+      icon: {
+        type: String
       },
       placeholder: {
         type: String
@@ -62,7 +74,8 @@
       },
       onBlur() {
       },
-      onInput() {
+      btnEvent() {
+        this.btn.visible && this.btn.handle();
       }
     }
   };
@@ -70,6 +83,7 @@
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
   @import "~common/styles/variable"
+  @import "~common/styles/mixin"
 
   .input-group
     font-size: $t_3
@@ -127,5 +141,24 @@
       width: 1%
       white-space: nowrap
       vertical-align: middle
+
+    .vc-btn-disabled
+      color: $c_light_color
+      user-select: none
+
+    .vc-input-icon
+      $active-block()
+      width: 1rem
+      text-align: center
+      background-color: $c_white
+      position: absolute
+      right: .013rem
+      top: .013rem
+      z-index: 8
+      padding-top: .204rem
+      padding-bottom: .204rem
+      i
+        font-size: .534rem
+        color: $c_light_color
 
 </style>

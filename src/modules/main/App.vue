@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import { open, backTo, removeLaunch, addEvent, sendEvent, execScript } from 'common/js/native';
+  import { open, backTo, removeLaunch, addEvent, execScript } from 'common/js/native';
   import { getStorage } from 'common/js/api';
   import { timeout } from 'common/js/utils';
 

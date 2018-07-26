@@ -1,6 +1,6 @@
 <template>
   <div class="vc-btn">
-    <button :class="classes" @click="$emit('click', $event)" :disabled="disabled">
+    <button :class="classes" :disabled="disabled">
       <slot></slot>
     </button>
   </div>

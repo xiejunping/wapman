@@ -1,3 +1,6 @@
+import CryptoJS from 'crypto-js';
+import { SECRET_KEY } from 'api/config';
+
 export function getImageLightness(image, onLoad, onError) {
   let canvas = document.createElement('canvas');
 
@@ -43,13 +46,7 @@ export function timeout(ms) {
   });
 }
 
-export function maskText(str, start, len) {
-  let arr = str.split(''), index = 0;
-  arr.forEach(function (t, i) {
-    if (i >= start && index < len) {
-      arr[i] = '*';
-      index++;
-    }
-  });
-  return arr.join('');
+export function aesEncrypt(content) {
+  const ciphertext = CryptoJS.AES.encrypt(content.toString(), SECRET_KEY);
+  return ciphertext.toString();
 }

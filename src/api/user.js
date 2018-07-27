@@ -32,7 +32,7 @@ export function userGetInfo(callback, error) {
 
 export function userUpdateInfo(params, callback, error) {
   Req({
-    url: '/index.php?s=User_User.Renewinfo',
+    url: '/user/info/set',
     type: 'POST',
     params: params,
     success: res => callback(res),
